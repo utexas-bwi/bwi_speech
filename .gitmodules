@@ -1,3 +1,7 @@
 [submodule "ThirdParty/Samples/Google/python-docs-samples"]
 	path = ThirdParty/Samples/Google/python-docs-samples
 	url = https://github.com/GoogleCloudPlatform/python-docs-samples.git
+[submodule "NLL/CkyParser"]
+	path = NLL/CkyParser
+	url = https://github.com/thomason-jesse/nlu_pipeline.git
+	branch = speech
