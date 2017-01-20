@@ -1,0 +1,3 @@
+[submodule "ThirdParty/Samples/Google/python-docs-samples"]
+	path = ThirdParty/Samples/Google/python-docs-samples
+	url = https://github.com/GoogleCloudPlatform/python-docs-samples.git
