@@ -31,6 +31,7 @@ from google.rpc import code_pb2
 import grpc
 import pyaudio
 from six.moves import queue
+import rospy
 
 #TODO Change if necessary. 
 #Adds nlu_pipeline src folder in order to import modules from it. 
@@ -46,6 +47,8 @@ try:
     import CKYParser
     from CKYParser import count_ccg_productions
     from utils import *
+    from Action import Action
+    from ActionSender import ActionSender
 except ImportError, e:
     print 'ERROR: Unable to load nlu_pipeline_modules! Verify that nlu_pipeline_path is set correctly!'
     print 'Error details: ' + str(e)
@@ -248,14 +251,40 @@ def listen_print_loop(recognize_stream):
             num_chars_printed = 0
             """
 
+def ground_parse_to_action(parse):
+    #TODO integrate actual grounder.
+    #TODO Use parse nodes, right now we're only using parse strings. 
+
+    #Simple commands will have form of action(param1, param2,...) 
+    #Therefore parse as follows:
+    action, params = parse.split('(')
+
+    #Post process action (ontologies don't necessarily match between our parser and the planner's). 
+    #TODO Add more mappings for actions if needed. 
+    if action == 'walk':
+        action = 'at'
+
+    #Need further processing for params. 
+    params = params.strip(')')  #Take away closing parenthesis. 
+    params = params.split(',')  #Now split by comma. 
+
+    return Action(action, params)
 
 def main():
     service = cloud_speech_pb2.SpeechStub(
         make_channel('speech.googleapis.com', 443))
 
+    #Instantiate ROS node. 
+    rospy.init_node('speech_language_acquisition')
+
     #Load parser from given path. 
     parser = load_obj_general(parser_path)
+
+    #Will hold user speech transcript. 
     response = None
+
+    #Action sender for sending actions to Segbot. #TODO None's are ont, lex, and out, do we need to add this later? 
+    action_sender = ActionSender(None, None, None)
 
     # For streaming audio from the microphone, there are three threads.
     # First, a thread that collects audio data as it comes in
@@ -291,6 +320,13 @@ def main():
                     parse = parser.print_parse(parse_node.node)
 
                     print "PARSE: " + parse + '\n'
+
+                    #Now ground.
+                    action = ground_parse_to_action(parse)
+
+                    #Send action to Segbot. 
+                    action_sender.execute_plan_action_client(action)
+                    
 
         except grpc.RpcError as e:
             code = e.code()
