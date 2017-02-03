@@ -65,13 +65,30 @@ CHUNK = int(RATE / 10)  # 100ms
 DEADLINE_SECS = 60 * 3 + 5
 SPEECH_SCOPE = 'https://www.googleapis.com/auth/cloud-platform'
 
+def replace_numbers_with_text(phrase): 
+    phrase = phrase.replace('0', 'zero ')
+    phrase = phrase.replace('1', 'one ')
+    phrase = phrase.replace('2', 'two ')
+    phrase = phrase.replace('3', 'three ')
+    phrase = phrase.replace('4', 'four ')
+    phrase = phrase.replace('5', 'five ')
+    phrase = phrase.replace('6', 'six ')
+    phrase = phrase.replace('7', 'seven ')
+    phrase = phrase.replace('8', 'eight ')
+    phrase = phrase.replace('9', 'nine ')
+
+    return phrase
+
 def tokenize_for_parser(phrase):
+    
     """
     This function takes in a string
     and returns a tokenized version for 
     it that is compatible with the format
     the CKYParser expects. 
     """
+    phrase = replace_numbers_with_text(phrase)
+
 
     #Currently only splits possessive. 
     return phrase.lower().replace("'", " '")
@@ -255,6 +272,10 @@ def ground_parse_to_action(parse):
     #TODO integrate actual grounder.
     #TODO Use parse nodes, right now we're only using parse strings. 
 
+    #If too complicated a semantic form, just throw away. 
+    if 'lambda' in parse or not 'walk' in parse: 
+        return None
+
     #Simple commands will have form of action(param1, param2,...) 
     #Therefore parse as follows:
     action, params = parse.split('(')
@@ -266,7 +287,7 @@ def ground_parse_to_action(parse):
 
     #Need further processing for params. 
     params = params.strip(')')  #Take away closing parenthesis. 
-    params = params.split(',')  #Now split by comma. 
+    params = params.split(',')  #Now split by comma.  
 
     return Action(action, params)
 
@@ -275,7 +296,7 @@ def main():
         make_channel('speech.googleapis.com', 443))
 
     #Instantiate ROS node. 
-    rospy.init_node('speech_language_acquisition')
+    #rospy.init_node('speech_language_acquisition')
 
     #Load parser from given path. 
     parser = load_obj_general(parser_path)
@@ -286,32 +307,30 @@ def main():
     #Action sender for sending actions to Segbot. #TODO None's are ont, lex, and out, do we need to add this later? 
     action_sender = ActionSender(None, None, None)
 
-    # For streaming audio from the microphone, there are three threads.
-    # First, a thread that collects audio data as it comes in
-    with record_audio(RATE, CHUNK) as buffered_audio_data:
-        # Second, a thread that sends requests with that data
-        requests = request_stream(buffered_audio_data, RATE)
-        # Third, a thread that listens for transcription responses
-        recognize_stream = service.StreamingRecognize(
-            requests, DEADLINE_SECS)
+    taking_input = True
 
-        # Exit things cleanly on interrupt
-        signal.signal(signal.SIGINT, lambda *_: recognize_stream.cancel())
+    while taking_input: 
+        # For streaming audio from the microphone, there are three threads.
+        # First, a thread that collects audio data as it comes in
+        with record_audio(RATE, CHUNK) as buffered_audio_data:
+            # Second, a thread that sends requests with that data
+            requests = request_stream(buffered_audio_data, RATE)
+            # Third, a thread that listens for transcription responses
+            recognize_stream = service.StreamingRecognize(
+                requests, DEADLINE_SECS)
 
-        # Now, put the transcription responses to use.
-        try:
-            taking_input = True
+            # Exit things cleanly on interrupt
+            signal.signal(signal.SIGINT, lambda *_: recognize_stream.cancel())
 
-            #Loop until user exits. 
-            while taking_input:
+            # Now, put the transcription responses to use.
+            try:
                 print "Please speak command: " 
-                response = listen_print_loop(recognize_stream)
+                response = listen_print_loop(recognize_stream).strip()
 
                 print "TRANSCRIPT: " + response
 
                 if response == 'exit' or response == 'quit':
                     #Stop listening and exit loop. 
-                    recognize_stream.cancel()
                     taking_input = False
                 else:
                     #Parse it using parser.
@@ -324,15 +343,28 @@ def main():
                     #Now ground.
                     action = ground_parse_to_action(parse)
 
-                    #Send action to Segbot. 
-                    action_sender.execute_plan_action_client(action)
-                    
+                    #Simple confirmation, so that we don't perform unwanted action. 
+                    print "I understood" 
+                    print "ACTION: " + str(action.name)
+                    print "PARAMS: " + str(action.params)
+                    print "Is this correct? (yes/no): " 
 
-        except grpc.RpcError as e:
-            code = e.code()
-            # CANCELLED is caused by the interrupt handler, which is expected.
-            if code is not code.CANCELLED:
-                raise
+                    response = listen_print_loop(recognize_stream).strip()
+
+                    if response == 'yes':
+                        print 'OK, performing action...'
+                        #Send action to Segbot. 
+                        #action_sender.execute_plan_action_client(action)
+                    else:
+                        print 'Ok, cancelling action...'
+
+                recognize_stream.cancel()
+
+            except grpc.RpcError as e:
+                code = e.code()
+                # CANCELLED is caused by the interrupt handler, which is expected.
+                if code is not code.CANCELLED:
+                    raise
 
 
 if __name__ == '__main__':
