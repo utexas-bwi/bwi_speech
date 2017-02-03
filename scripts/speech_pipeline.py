@@ -352,11 +352,11 @@ def main():
                     response = listen_print_loop(recognize_stream).strip()
 
                     if response == 'yes':
-                        print 'OK, performing action...'
+                        print 'OK, performing action...\n'
                         #Send action to Segbot. 
                         #action_sender.execute_plan_action_client(action)
                     else:
-                        print 'Ok, cancelling action...'
+                        print 'Ok, cancelling action...\n'
 
                 recognize_stream.cancel()
 
@@ -365,6 +365,10 @@ def main():
                 # CANCELLED is caused by the interrupt handler, which is expected.
                 if code is not code.CANCELLED:
                     raise
+
+            #If people take too long, this error comes up, ignore it. 
+            except RuntimeError as e: 
+                pass
 
 
 if __name__ == '__main__':
