@@ -1,7 +1,7 @@
 # bwi_speech
 Speech functionality for BWI
 
-# Installation
+# Installation and Setup
 
 To install first clone this repo to your catkin workspace: 
 
@@ -38,4 +38,47 @@ Speech API requires, this step may take some cleaning up of packages:
 ```
 $ cd catkin_ws/src/bwi_speech/ThirdParty/Samples/Google/python-docs-samples/speech/grpc/
 $ sudo pip install -r requirements.txt
+```
+
+Before you can use the Google Speech API, you need to install the Google Cloud SDK using the
+instructions found at: https://cloud.google.com/sdk/downloads#apt-get
+
+After installing the SDK, you'll need to authenticate yourself to be able to call the API: 
+
+```
+$ gcloud beta auth application-default login
+```
+
+# Usage
+
+In order to use, first source your workspace: 
+
+```
+$ source catkin_ws/devel/setup.bash
+```
+
+Then open a new terminal tab to run roscore:
+
+```
+$ roscore
+```
+
+Then in another tab either run the Segbot simulator: 
+
+```
+$ roslaunch bwi_launch simulation.launch
+```
+
+OR run the actual Segbot package for controlling one 
+of the Segbots:
+
+```
+$ roslaunch bwi_launch segbot_v2.launch
+$ roslaunch bwi_kr_execution bwi_kr_execution.launch
+```
+
+Finally, run the speech pipeline script: 
+
+```
+$ rosrun bwi_speech speech_pipeline.py
 ```

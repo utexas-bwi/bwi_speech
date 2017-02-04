@@ -35,12 +35,12 @@ import rospy
 
 #TODO Change if necessary. 
 #Adds nlu_pipeline src folder in order to import modules from it. 
-nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
+nlu_pipeline_path = '/home/users/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
 sys.path.append(nlu_pipeline_path)
 
 #TODO Change if necessary. 
 #Path to CKYParser
-parser_path = 'parser.cky'
+parser_path = '/home/users/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
 
 #Nlu pipeline modules.
 try:
@@ -296,7 +296,7 @@ def main():
         make_channel('speech.googleapis.com', 443))
 
     #Instantiate ROS node. 
-    #rospy.init_node('speech_language_acquisition')
+    rospy.init_node('speech_language_acquisition')
 
     #Load parser from given path. 
     parser = load_obj_general(parser_path)
@@ -354,7 +354,7 @@ def main():
                     if response == 'yes':
                         print 'OK, performing action...\n'
                         #Send action to Segbot. 
-                        #action_sender.execute_plan_action_client(action)
+                        action_sender.execute_plan_action_client(action)
                     else:
                         print 'Ok, cancelling action...\n'
 
