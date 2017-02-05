@@ -35,12 +35,12 @@ import rospy
 
 #TODO Change if necessary. 
 #Adds nlu_pipeline src folder in order to import modules from it. 
-nlu_pipeline_path = '/home/users/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
+nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
 sys.path.append(nlu_pipeline_path)
 
 #TODO Change if necessary. 
 #Path to CKYParser
-parser_path = '/home/users/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
+parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
 
 #Nlu pipeline modules.
 try:
@@ -283,11 +283,20 @@ def ground_parse_to_action(parse):
     #Post process action (ontologies don't necessarily match between our parser and the planner's). 
     #TODO Add more mappings for actions if needed. 
     if action == 'walk':
-        action = 'at'
-
-    #Need further processing for params. 
-    params = params.strip(')')  #Take away closing parenthesis. 
-    params = params.split(',')  #Now split by comma.  
+        #Format parameter to fit door description. 
+        params = params.strip(')')
+        
+        if params == 'l3_414b':
+            action = 'at'
+            params = [params]
+        else:
+            action = 'beside'
+            params = params.replace('l', 'd')
+            params = [params]
+            print params
+    else:
+        #Only allow the walk action for now. 
+        return None
 
     return Action(action, params)
 
@@ -343,20 +352,24 @@ def main():
                     #Now ground.
                     action = ground_parse_to_action(parse)
 
-                    #Simple confirmation, so that we don't perform unwanted action. 
-                    print "I understood" 
-                    print "ACTION: " + str(action.name)
-                    print "PARAMS: " + str(action.params)
-                    print "Is this correct? (yes/no): " 
+                    #Not a valid action. 
+                    if type(action) == type(None):
+                        print 'Sorry, action not valid or misunderstood...'
+                    else: 
+                        #Simple confirmation, so that we don't perform unwanted action. 
+                        print "I understood" 
+                        print "ACTION: " + str(action.name)
+                        print "PARAMS: " + str(action.params)
+                        print "Is this correct? (yes/no): " 
 
-                    response = listen_print_loop(recognize_stream).strip()
+                        response = listen_print_loop(recognize_stream).strip()
 
-                    if response == 'yes':
-                        print 'OK, performing action...\n'
-                        #Send action to Segbot. 
-                        action_sender.execute_plan_action_client(action)
-                    else:
-                        print 'Ok, cancelling action...\n'
+                        if response == 'yes':
+                            print 'OK, performing action...\n'
+                            #Send action to Segbot. 
+                            action_sender.execute_plan_action_client(action)
+                        else:
+                            print 'Ok, cancelling action...\n'
 
                 recognize_stream.cancel()
 
