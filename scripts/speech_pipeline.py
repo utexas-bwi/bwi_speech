@@ -22,6 +22,7 @@ import re
 import signal
 import sys
 
+
 import google.auth
 import google.auth.transport.grpc
 import google.auth.transport.requests
@@ -34,14 +35,12 @@ import rospy
 
 #TODO Change if necessary. 
 #Adds nlu_pipeline src folder in order to import modules from it. 
-#nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
 nlu_pipeline_path = '/home/justin/UT/Research/CatkinWorkspaces/bwi_speech_catkin/src/bwi_speech/NLL/CkyParser/src/'
 sys.path.append(nlu_pipeline_path)
 
 #TODO Change if necessary. 
 #Path to CKYParser
-#parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
-parser_path = '/home/justin/data/pickled_parser.pyc'
+parser_path = 'parser.cky'
 
 #Nlu pipeline modules.
 try:
@@ -50,13 +49,6 @@ try:
     from utils import *
     from Action import Action
     from ActionSender import ActionSender
-
-    from Ontology import Ontology
-
-    #grounder_path = '/home/justin/UT/Research/Code/dialog_active_learning/src'
-    #sys.path.append(grounder_path)
-    from Grounder import Grounder
-
 except ImportError, e:
     print 'ERROR: Unable to load nlu_pipeline_modules! Verify that nlu_pipeline_path is set correctly!'
     print 'Error details: ' + str(e)
@@ -73,30 +65,13 @@ CHUNK = int(RATE / 10)  # 100ms
 DEADLINE_SECS = 60 * 3 + 5
 SPEECH_SCOPE = 'https://www.googleapis.com/auth/cloud-platform'
 
-def replace_numbers_with_text(phrase): 
-    phrase = phrase.replace('0', 'zero ')
-    phrase = phrase.replace('1', 'one ')
-    phrase = phrase.replace('2', 'two ')
-    phrase = phrase.replace('3', 'three ')
-    phrase = phrase.replace('4', 'four ')
-    phrase = phrase.replace('5', 'five ')
-    phrase = phrase.replace('6', 'six ')
-    phrase = phrase.replace('7', 'seven ')
-    phrase = phrase.replace('8', 'eight ')
-    phrase = phrase.replace('9', 'nine ')
-
-    return phrase
-
 def tokenize_for_parser(phrase):
-    
     """
     This function takes in a string
     and returns a tokenized version for 
     it that is compatible with the format
     the CKYParser expects. 
     """
-    phrase = replace_numbers_with_text(phrase)
-
 
     #Currently only splits possessive. 
     return phrase.lower().replace("'", " '")
@@ -280,10 +255,6 @@ def ground_parse_to_action(parse):
     #TODO integrate actual grounder.
     #TODO Use parse nodes, right now we're only using parse strings. 
 
-    #If too complicated a semantic form, just throw away. 
-    if 'lambda' in parse or not 'walk' in parse: 
-        return None
-
     #Simple commands will have form of action(param1, param2,...) 
     #Therefore parse as follows:
     action, params = parse.split('(')
@@ -291,20 +262,11 @@ def ground_parse_to_action(parse):
     #Post process action (ontologies don't necessarily match between our parser and the planner's). 
     #TODO Add more mappings for actions if needed. 
     if action == 'walk':
-        #Format parameter to fit door description. 
-        params = params.strip(')')
-        
-        if params == 'l3_414b':
-            action = 'at'
-            params = [params]
-        else:
-            action = 'beside'
-            params = params.replace('l', 'd')
-            params = [params]
-            print params
-    else:
-        #Only allow the walk action for now. 
-        return None
+        action = 'at'
+
+    #Need further processing for params. 
+    params = params.strip(')')  #Take away closing parenthesis. 
+    params = params.split(',')  #Now split by comma. 
 
     return Action(action, params)
 
@@ -313,7 +275,7 @@ def main():
         make_channel('speech.googleapis.com', 443))
 
     #Instantiate ROS node. 
-    #rospy.init_node('speech_language_acquisition')
+    rospy.init_node('speech_language_acquisition')
 
     #Load parser from given path. 
     parser = load_obj_general(parser_path)
@@ -322,45 +284,34 @@ def main():
     response = None
 
     #Action sender for sending actions to Segbot. #TODO None's are ont, lex, and out, do we need to add this later? 
-    #action_sender = ActionSender(None, None, None)
+    action_sender = ActionSender(None, None, None)
 
-    taking_input = True
+    # For streaming audio from the microphone, there are three threads.
+    # First, a thread that collects audio data as it comes in
+    with record_audio(RATE, CHUNK) as buffered_audio_data:
+        # Second, a thread that sends requests with that data
+        requests = request_stream(buffered_audio_data, RATE)
+        # Third, a thread that listens for transcription responses
+        recognize_stream = service.StreamingRecognize(
+            requests, DEADLINE_SECS)
 
-    #Add grounder
+        # Exit things cleanly on interrupt
+        signal.signal(signal.SIGINT, lambda *_: recognize_stream.cancel())
 
-    ontology = Ontology('/home/justin/resources/ont.txt')
-    #lexicon = Lexicon(ontology, lex_file)
-    
-    kb_predicates = dict()
-    kb_predicates['person'] = ['stacy', 'scott', 'jesse', 'shiqi', 'jivko', 'rodolfo', 'aishwarya', 'peter', 'dana', 'ray', 'justin']
-    kb_predicates['item'] = ['chips', 'coffee', 'hamburger', 'juice', 'muffin']
-    kb_predicates['room'] = ['l3_404', 'l3_402', 'l3_512', 'l3_510', 'l3_508', 'l3_432', 'l3_420', 'l3_502', 'l3_414b']
-    kb_predicates['hasoffice'] = [('justin', 'l3_402'), ('scott', 'l3_404'), ('ray', 'l3_512'), ('dana', 'l3_510'), ('peter', 'l3_508'), ('shiqi', 'l3_432'), ('jivko', 'l3_420'), ('stacy', 'l3_502'), ('jesse', 'l3_414b'), ('aishwarya', 'l3_414b'), ('rodolfo', 'l3_414b')]
+        # Now, put the transcription responses to use.
+        try:
+            taking_input = True
 
-    grounder = Grounder(ontology, perception_module=None, kb_predicates=kb_predicates, classifier_predicates=None)
-
-    while taking_input: 
-        # For streaming audio from the microphone, there are three threads.
-        # First, a thread that collects audio data as it comes in
-        with record_audio(RATE, CHUNK) as buffered_audio_data:
-            # Second, a thread that sends requests with that data
-            requests = request_stream(buffered_audio_data, RATE)
-            # Third, a thread that listens for transcription responses
-            recognize_stream = service.StreamingRecognize(
-                requests, DEADLINE_SECS)
-
-            # Exit things cleanly on interrupt
-            signal.signal(signal.SIGINT, lambda *_: recognize_stream.cancel())
-
-            # Now, put the transcription responses to use.
-            try:
+            #Loop until user exits. 
+            while taking_input:
                 print "Please speak command: " 
-                response = listen_print_loop(recognize_stream).strip()
+                response = listen_print_loop(recognize_stream)
 
                 print "TRANSCRIPT: " + response
 
                 if response == 'exit' or response == 'quit':
                     #Stop listening and exit loop. 
+                    recognize_stream.cancel()
                     taking_input = False
                 else:
                     #Parse it using parser.
@@ -373,36 +324,15 @@ def main():
                     #Now ground.
                     action = ground_parse_to_action(parse)
 
-                    #Not a valid action. 
-                    if type(action) == type(None):
-                        print 'Sorry, action not valid or misunderstood...'
-                    else: 
-                        #Simple confirmation, so that we don't perform unwanted action. 
-                        print "I understood" 
-                        print "ACTION: " + str(action.name)
-                        print "PARAMS: " + str(action.params)
-                        print "Is this correct? (yes/no): " 
+                    #Send action to Segbot. 
+                    action_sender.execute_plan_action_client(action)
+                    
 
-                        response = listen_print_loop(recognize_stream).strip()
-
-                        if response == 'yes':
-                            print 'OK, performing action...\n'
-                            #Send action to Segbot. 
-                            #action_sender.execute_plan_action_client(action)
-                        else:
-                            print 'Ok, cancelling action...\n'
-
-                recognize_stream.cancel()
-
-            except grpc.RpcError as e:
-                code = e.code()
-                # CANCELLED is caused by the interrupt handler, which is expected.
-                if code is not code.CANCELLED:
-                    raise
-
-            #If people take too long, this error comes up, ignore it. 
-            except RuntimeError as e: 
-                pass
+        except grpc.RpcError as e:
+            code = e.code()
+            # CANCELLED is caused by the interrupt handler, which is expected.
+            if code is not code.CANCELLED:
+                raise
 
 
 if __name__ == '__main__':
