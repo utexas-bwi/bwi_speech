@@ -35,13 +35,13 @@ import rospy
 #TODO Change if necessary. 
 #Adds nlu_pipeline src folder in order to import modules from it. 
 #nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
-nlu_pipeline_path = '/home/justin/UT/Research/CatkinWorkspaces/bwi_speech_catkin/src/bwi_speech/NLL/CkyParser/src/'
+nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src'
 sys.path.append(nlu_pipeline_path)
 
 #TODO Change if necessary. 
 #Path to CKYParser
 #parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
-parser_path = '/home/justin/data/pickled_parser.pyc'
+parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
 
 #Nlu pipeline modules.
 try:
@@ -328,16 +328,26 @@ def main():
 
     #Add grounder
 
-    ontology = Ontology('/home/justin/resources/ont.txt')
+    ontology = Ontology('/home/rcorona/catkin_ws/src/bwi_speech/src/ont.txt')
     #lexicon = Lexicon(ontology, lex_file)
     
     kb_predicates = dict()
     kb_predicates['person'] = ['stacy', 'scott', 'jesse', 'shiqi', 'jivko', 'rodolfo', 'aishwarya', 'peter', 'dana', 'ray', 'justin']
     kb_predicates['item'] = ['chips', 'coffee', 'hamburger', 'juice', 'muffin']
-    kb_predicates['room'] = ['l3_404', 'l3_402', 'l3_512', 'l3_510', 'l3_508', 'l3_432', 'l3_420', 'l3_502', 'l3_414b']
-    kb_predicates['hasoffice'] = [('justin', 'l3_402'), ('scott', 'l3_404'), ('ray', 'l3_512'), ('dana', 'l3_510'), ('peter', 'l3_508'), ('shiqi', 'l3_432'), ('jivko', 'l3_420'), ('stacy', 'l3_502'), ('jesse', 'l3_414b'), ('aishwarya', 'l3_414b'), ('rodolfo', 'l3_414b')]
+    kb_predicates['office'] = ['l3_404', 'l3_402', 'l3_512', 'l3_510', 'l3_508', 'l3_432', 'l3_420', 'l3_502', 'l3_414b']
+    kb_predicates['possesses'] = [('justin', 'l3_402'), ('scott', 'l3_404'), ('l3_512', 'ray'), ('dana', 'l3_510'), ('peter', 'l3_508'), ('shiqi', 'l3_432'), ('jivko', 'l3_420'), ('stacy', 'l3_502'), ('jesse', 'l3_414b'), ('aishwarya', 'l3_414b'), ('rodolfo', 'l3_414b')]
 
     grounder = Grounder(ontology, perception_module=None, kb_predicates=kb_predicates, classifier_predicates=None)
+
+    parse = parser.most_likely_cky_parse("walk to ray 's office").next()[0]
+    semantic_node = parse.node
+
+    print parser.print_parse(semantic_node)
+
+    print grounder.ground_semantic_node(semantic_node)
+
+    sys.exit()
+
 
     while taking_input: 
         # For streaming audio from the microphone, there are three threads.
