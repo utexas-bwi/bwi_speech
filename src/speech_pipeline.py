@@ -332,9 +332,9 @@ def main():
     #lexicon = Lexicon(ontology, lex_file)
     
     kb_predicates = dict()
-    kb_predicates['person'] = ['stacy', 'scott', 'jesse', 'shiqi', 'jivko', 'rodolfo', 'aishwarya', 'peter', 'dana', 'ray', 'justin']
+    kb_predicates['person'] = [('stacy'), ('scott'), ('jesse'), ('shiqi'), ('jivko'), ('rodolfo'), ('aishwarya'), ('peter'), ('dana'), ('ray'), ('justin')]
     kb_predicates['item'] = ['chips', 'coffee', 'hamburger', 'juice', 'muffin']
-    kb_predicates['office'] = ['l3_404', 'l3_402', 'l3_512', 'l3_510', 'l3_508', 'l3_432', 'l3_420', 'l3_502', 'l3_414b']
+    kb_predicates['office'] = [('l3_404'), ('l3_402'), ('l3_512'), ('l3_510'), ('l3_508'), ('l3_432'), ('l3_420'), ('l3_502'), ('l3_414b')]
     kb_predicates['possesses'] = [('justin', 'l3_402'), ('scott', 'l3_404'), ('l3_512', 'ray'), ('dana', 'l3_510'), ('peter', 'l3_508'), ('shiqi', 'l3_432'), ('jivko', 'l3_420'), ('stacy', 'l3_502'), ('jesse', 'l3_414b'), ('aishwarya', 'l3_414b'), ('rodolfo', 'l3_414b')]
 
     grounder = Grounder(ontology, perception_module=None, kb_predicates=kb_predicates, classifier_predicates=None)
