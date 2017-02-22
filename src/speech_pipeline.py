@@ -344,7 +344,7 @@ def main():
 
     print parser.print_parse(semantic_node)
 
-    print grounder.ground_semantic_node(semantic_node)
+    print grounder.ground_semantic_node(semantic_node)[0][0][0]
 
     sys.exit()
 
