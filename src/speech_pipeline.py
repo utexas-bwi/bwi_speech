@@ -335,11 +335,11 @@ def main():
     kb_predicates['person'] = [('stacy'), ('scott'), ('jesse'), ('shiqi'), ('jivko'), ('rodolfo'), ('aishwarya'), ('peter'), ('dana'), ('ray'), ('justin')]
     kb_predicates['item'] = ['chips', 'coffee', 'hamburger', 'juice', 'muffin']
     kb_predicates['office'] = [('l3_404'), ('l3_402'), ('l3_512'), ('l3_510'), ('l3_508'), ('l3_432'), ('l3_420'), ('l3_502'), ('l3_414b')]
-    kb_predicates['possesses'] = [('justin', 'l3_402'), ('scott', 'l3_404'), ('l3_512', 'ray'), ('dana', 'l3_510'), ('peter', 'l3_508'), ('shiqi', 'l3_432'), ('jivko', 'l3_420'), ('stacy', 'l3_502'), ('jesse', 'l3_414b'), ('aishwarya', 'l3_414b'), ('rodolfo', 'l3_414b')]
+    kb_predicates['possesses'] = [('l3_402', 'justin'), ('l3_404', 'scott'), ('l3_512', 'ray'), ('l3_510', 'dana'), ('l3_508','peter'), ('l3_432', 'shiqi'), ('l3_420', 'jivko'), ('l3_502', 'stacy'), ('l3_414b', 'jesse'), ('l3_414b', 'aishwarya'), ('l3_414b', 'rodolfo')]
 
     grounder = Grounder(ontology, perception_module=None, kb_predicates=kb_predicates, classifier_predicates=None)
 
-    parse = parser.most_likely_cky_parse("walk to ray 's office").next()[0]
+    parse = parser.most_likely_cky_parse("run over to peter 's office").next()[0]
     semantic_node = parse.node
 
     print parser.print_parse(semantic_node)
