@@ -321,7 +321,7 @@ def main():
     action_sender = ActionSender(None, None, None)
 
     #Load ontology for use by grounder. 
-    ontology = Ontology('/home/rcorona/catkin_ws/src/bwi_speech/src/ont.txt')
+    ontology = Ontology('/home/users/rcorona/catkin_ws/src/bwi_speech/src/ont.txt')
    
     #Predicates for our knowledge base. 
     kb_predicates = dict()
