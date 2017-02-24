@@ -27,6 +27,7 @@ import google.auth
 import google.auth.transport.grpc
 import google.auth.transport.requests
 from google.cloud.grpc.speech.v1beta1 import cloud_speech_pb2
+from google.cloud.grpc.speech.v1beta1.cloud_speech_pb2 import SpeechContext
 from google.rpc import code_pb2
 import grpc
 import pyaudio
@@ -35,12 +36,14 @@ import rospy
 
 #TODO Change if necessary. 
 #Adds nlu_pipeline src folder in order to import modules from it. 
-nlu_pipeline_path = '/home/users/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
+#nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
+nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src'
 sys.path.append(nlu_pipeline_path)
 
 #TODO Change if necessary. 
 #Path to CKYParser
-parser_path = '/home/users/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
+#parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
+parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
 
 #Nlu pipeline modules.
 try:
@@ -49,6 +52,13 @@ try:
     from utils import *
     from Action import Action
     from ActionSender import ActionSender
+
+    from Ontology import Ontology
+
+    #grounder_path = '/home/justin/UT/Research/Code/dialog_active_learning/src'
+    #sys.path.append(grounder_path)
+    from Grounder import Grounder
+
 except ImportError, e:
     print 'ERROR: Unable to load nlu_pipeline_modules! Verify that nlu_pipeline_path is set correctly!'
     print 'Error details: ' + str(e)
@@ -193,6 +203,8 @@ def request_stream(data_stream, rate, interim_results=True):
         # See http://g.co/cloud/speech/docs/languages
         # for a list of supported languages.
         language_code='en-US',  # a BCP-47 language tag
+
+        speech_context=SpeechContext(phrases=["ray's", "peter's", "jivko's", "justin's"]),
     )
     streaming_config = cloud_speech_pb2.StreamingRecognitionConfig(
         interim_results=interim_results,
@@ -268,44 +280,39 @@ def listen_print_loop(recognize_stream):
             num_chars_printed = 0
             """
 
-def ground_parse_to_action(parse):
-    #TODO integrate actual grounder.
-    #TODO Use parse nodes, right now we're only using parse strings. 
+def ground_parse_to_action(semantic_node, grounder):
+    #Attempt to get action by grounding parse.
+    try: 
+        action = grounder.ground_semantic_node(semantic_node)[0][0][0]
+    except: 
+        action = None
 
-    #If too complicated a semantic form, just throw away. 
-    if 'lambda' in parse or not 'walk' in parse: 
-        return None
+    return action
 
-    #Simple commands will have form of action(param1, param2,...) 
-    #Therefore parse as follows:
-    action, params = parse.split('(')
+def post_process_action(action, recognize_stream): 
+    if action.name == 'walk': 
+        print 'Would you like me to walk INTO the room? (yes/no): '
 
-    #Post process action (ontologies don't necessarily match between our parser and the planner's). 
-    #TODO Add more mappings for actions if needed. 
-    if action == 'walk':
-        #Format parameter to fit door description. 
-        params = params.strip(')')
-        
-        if params == 'l3_414b':
-            action = 'at'
-            params = [params]
+        response = listen_print_loop(recognize_stream).strip()
+
+        if response == 'yes':
+            action.name = 'at'
         else:
-            action = 'beside'
-            params = params.replace('l', 'd')
-            params = [params]
-            print params
-    else:
-        #Only allow the walk action for now. 
-        return None
+            #Facing action used for doors. b1 replaces b in case where we're going to the lab. 
+            action.name = 'facing'
+            action.params[0] = action.params[0].replace('l', 'd').replace('b', 'b1')
 
-    return Action(action, params)
+    print action
 
 def main():
+    #Redirect standard error so that we don't have noisy output. 
+    sys.stderr = open('err.txt', 'w')
+
     service = cloud_speech_pb2.SpeechStub(
         make_channel('speech.googleapis.com', 443))
 
     #Instantiate ROS node. 
-    rospy.init_node('speech_language_acquisition')
+#rospy.init_node('speech_language_acquisition')
 
     #Load parser from given path. 
     parser = load_obj_general(parser_path)
@@ -316,6 +323,20 @@ def main():
     #Action sender for sending actions to Segbot. #TODO None's are ont, lex, and out, do we need to add this later? 
     action_sender = ActionSender(None, None, None)
 
+    #Load ontology for use by grounder. 
+    ontology = Ontology('/home/rcorona/catkin_ws/src/bwi_speech/src/ont.txt')
+   
+    #Predicates for our knowledge base. 
+    kb_predicates = dict()
+    kb_predicates['person'] = [('stacy'), ('scott'), ('jesse'), ('shiqi'), ('jivko'), ('rodolfo'), ('aishwarya'), ('peter'), ('dana'), ('ray'), ('justin')]
+    kb_predicates['item'] = ['chips', 'coffee', 'hamburger', 'juice', 'muffin']
+    kb_predicates['office'] = [('l3_404'), ('l3_402'), ('l3_512'), ('l3_510'), ('l3_508'), ('l3_432'), ('l3_420'), ('l3_502'), ('l3_414b')]
+    kb_predicates['possesses'] = [('l3_402', 'justin'), ('l3_404', 'scott'), ('l3_512', 'ray'), ('l3_510', 'dana'), ('l3_508','peter'), ('l3_432', 'shiqi'), ('l3_420', 'jivko'), ('l3_502', 'stacy'), ('l3_414b', 'jesse'), ('l3_414b', 'aishwarya'), ('l3_414b', 'rodolfo')]
+
+    #Instantiate gounder with given kb predicates and ontology. 
+    grounder = Grounder(ontology, perception_module=None, kb_predicates=kb_predicates, classifier_predicates=None)
+    
+    #Used to keep looping for as long as desired. 
     taking_input = True
 
     while taking_input: 
@@ -336,6 +357,7 @@ def main():
                 print "Please speak command: " 
                 response = listen_print_loop(recognize_stream).strip()
 
+                print '\n*************'
                 print "TRANSCRIPT: " + response
 
                 if response == 'exit' or response == 'quit':
@@ -345,34 +367,40 @@ def main():
                     #Parse it using parser.
                     response = tokenize_for_parser(response)
 
+            #TODO change this once we can hanlde longer phrases, it's an ugly hack. 
 		    if len(response.split()) > 7: 
 		        print 'Sorry, command too long to parse...'
-	                parse = 'invalid' #TODO change this, since it's an ugly solution. 
+	                parse = 'invalid'
 	            else: 
-                        parse_node = parser.most_likely_cky_parse(response).next()[0] 
-                        parse = parser.print_parse(parse_node.node)
+                        semantic_node = parser.most_likely_cky_parse(response).next()[0].node 
+                        parse = parser.print_parse(semantic_node)
 
-                        print "PARSE: " + parse + '\n'
+                        print "PARSE: " + parse
 
                     #Now ground.
-                    action = ground_parse_to_action(parse)
+                    action = ground_parse_to_action(semantic_node, grounder)
 
                     #Not a valid action. 
                     if type(action) == type(None):
                         print 'Sorry, action not valid or misunderstood...'
                     else: 
                         #Simple confirmation, so that we don't perform unwanted action. 
-                        print "I understood" 
                         print "ACTION: " + str(action.name)
                         print "PARAMS: " + str(action.params)
+                        print '*************\n' 
+
                         print "Is this correct? (yes/no): " 
 
                         response = listen_print_loop(recognize_stream).strip()
 
                         if response == 'yes':
                             print 'OK, performing action...\n'
+
+                            #Post process action with further clarifications if necessary.
+                            post_process_action(action, recognize_stream)
+
                             #Send action to Segbot. 
-                            action_sender.execute_plan_action_client(action)
+                            pass#action_sender.execute_plan_action_client(action)
                         else:
                             print 'Ok, cancelling action...\n'
 
