@@ -22,6 +22,7 @@ import re
 import signal
 import sys
 
+
 import google.auth
 import google.auth.transport.grpc
 import google.auth.transport.requests
@@ -34,14 +35,12 @@ import rospy
 
 #TODO Change if necessary. 
 #Adds nlu_pipeline src folder in order to import modules from it. 
-#nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
-nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src'
+nlu_pipeline_path = '/home/users/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
 sys.path.append(nlu_pipeline_path)
 
 #TODO Change if necessary. 
 #Path to CKYParser
-#parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
-parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
+parser_path = '/home/users/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
 
 #Nlu pipeline modules.
 try:
@@ -50,13 +49,6 @@ try:
     from utils import *
     from Action import Action
     from ActionSender import ActionSender
-
-    from Ontology import Ontology
-
-    #grounder_path = '/home/justin/UT/Research/Code/dialog_active_learning/src'
-    #sys.path.append(grounder_path)
-    from Grounder import Grounder
-
 except ImportError, e:
     print 'ERROR: Unable to load nlu_pipeline_modules! Verify that nlu_pipeline_path is set correctly!'
     print 'Error details: ' + str(e)
@@ -313,7 +305,7 @@ def main():
         make_channel('speech.googleapis.com', 443))
 
     #Instantiate ROS node. 
-    #rospy.init_node('speech_language_acquisition')
+    rospy.init_node('speech_language_acquisition')
 
     #Load parser from given path. 
     parser = load_obj_general(parser_path)
@@ -322,32 +314,9 @@ def main():
     response = None
 
     #Action sender for sending actions to Segbot. #TODO None's are ont, lex, and out, do we need to add this later? 
-    #action_sender = ActionSender(None, None, None)
+    action_sender = ActionSender(None, None, None)
 
     taking_input = True
-
-    #Add grounder
-
-    ontology = Ontology('/home/rcorona/catkin_ws/src/bwi_speech/src/ont.txt')
-    #lexicon = Lexicon(ontology, lex_file)
-    
-    kb_predicates = dict()
-    kb_predicates['person'] = [('stacy'), ('scott'), ('jesse'), ('shiqi'), ('jivko'), ('rodolfo'), ('aishwarya'), ('peter'), ('dana'), ('ray'), ('justin')]
-    kb_predicates['item'] = ['chips', 'coffee', 'hamburger', 'juice', 'muffin']
-    kb_predicates['office'] = [('l3_404'), ('l3_402'), ('l3_512'), ('l3_510'), ('l3_508'), ('l3_432'), ('l3_420'), ('l3_502'), ('l3_414b')]
-    kb_predicates['possesses'] = [('l3_402', 'justin'), ('l3_404', 'scott'), ('l3_512', 'ray'), ('l3_510', 'dana'), ('l3_508','peter'), ('l3_432', 'shiqi'), ('l3_420', 'jivko'), ('l3_502', 'stacy'), ('l3_414b', 'jesse'), ('l3_414b', 'aishwarya'), ('l3_414b', 'rodolfo')]
-
-    grounder = Grounder(ontology, perception_module=None, kb_predicates=kb_predicates, classifier_predicates=None)
-
-    parse = parser.most_likely_cky_parse("run over to peter 's office").next()[0]
-    semantic_node = parse.node
-
-    print parser.print_parse(semantic_node)
-
-    print grounder.ground_semantic_node(semantic_node)[0][0][0]
-
-    sys.exit()
-
 
     while taking_input: 
         # For streaming audio from the microphone, there are three threads.
@@ -375,10 +344,15 @@ def main():
                 else:
                     #Parse it using parser.
                     response = tokenize_for_parser(response)
-                    parse_node = parser.most_likely_cky_parse(response).next()[0] 
-                    parse = parser.print_parse(parse_node.node)
 
-                    print "PARSE: " + parse + '\n'
+		    if len(response.split()) > 7: 
+		        print 'Sorry, command too long to parse...'
+	                parse = 'invalid' #TODO change this, since it's an ugly solution. 
+	            else: 
+                        parse_node = parser.most_likely_cky_parse(response).next()[0] 
+                        parse = parser.print_parse(parse_node.node)
+
+                        print "PARSE: " + parse + '\n'
 
                     #Now ground.
                     action = ground_parse_to_action(parse)
@@ -398,7 +372,7 @@ def main():
                         if response == 'yes':
                             print 'OK, performing action...\n'
                             #Send action to Segbot. 
-                            #action_sender.execute_plan_action_client(action)
+                            action_sender.execute_plan_action_client(action)
                         else:
                             print 'Ok, cancelling action...\n'
 
