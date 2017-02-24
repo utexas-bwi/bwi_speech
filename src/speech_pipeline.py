@@ -37,13 +37,13 @@ import rospy
 #TODO Change if necessary. 
 #Adds nlu_pipeline src folder in order to import modules from it. 
 #nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
-nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src'
+nlu_pipeline_path = '/home/users/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src' #For Bender
 sys.path.append(nlu_pipeline_path)
 
 #TODO Change if necessary. 
 #Path to CKYParser
 #parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
-parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
+parser_path = '/home/users/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
 
 #Nlu pipeline modules.
 try:
@@ -305,9 +305,6 @@ def post_process_action(action, recognize_stream):
     print action
 
 def main():
-    #Redirect standard error so that we don't have noisy output. 
-    sys.stderr = open('err.txt', 'w')
-
     service = cloud_speech_pb2.SpeechStub(
         make_channel('speech.googleapis.com', 443))
 
