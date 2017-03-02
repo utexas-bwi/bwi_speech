@@ -204,7 +204,7 @@ def request_stream(data_stream, rate, interim_results=True):
         # for a list of supported languages.
         language_code='en-US',  # a BCP-47 language tag
 
-        speech_context=SpeechContext(phrases=["ray's", "peter's", "jivko's", "justin's"]),
+        speech_context=SpeechContext(phrases=["ray's", "peter's", "jivko's", "shiqi's", "walk to", "run over to", "go to", "lab"]),
     )
     streaming_config = cloud_speech_pb2.StreamingRecognitionConfig(
         interim_results=interim_results,
@@ -309,7 +309,7 @@ def main():
         make_channel('speech.googleapis.com', 443))
 
     #Instantiate ROS node. 
-#rospy.init_node('speech_language_acquisition')
+    rospy.init_node('speech_language_acquisition')
 
     #Load parser from given path. 
     parser = load_obj_general(parser_path)
@@ -321,14 +321,14 @@ def main():
     action_sender = ActionSender(None, None, None)
 
     #Load ontology for use by grounder. 
-    ontology = Ontology('/home/rcorona/catkin_ws/src/bwi_speech/src/ont.txt')
+    ontology = Ontology('/home/users/rcorona/catkin_ws/src/bwi_speech/src/ont.txt')
    
     #Predicates for our knowledge base. 
     kb_predicates = dict()
     kb_predicates['person'] = [('stacy'), ('scott'), ('jesse'), ('shiqi'), ('jivko'), ('rodolfo'), ('aishwarya'), ('peter'), ('dana'), ('ray'), ('justin')]
     kb_predicates['item'] = ['chips', 'coffee', 'hamburger', 'juice', 'muffin']
     kb_predicates['office'] = [('l3_404'), ('l3_402'), ('l3_512'), ('l3_510'), ('l3_508'), ('l3_432'), ('l3_420'), ('l3_502'), ('l3_414b')]
-    kb_predicates['possesses'] = [('l3_402', 'justin'), ('l3_404', 'scott'), ('l3_512', 'ray'), ('l3_510', 'dana'), ('l3_508','peter'), ('l3_432', 'shiqi'), ('l3_420', 'jivko'), ('l3_502', 'stacy'), ('l3_414b', 'jesse'), ('l3_414b', 'aishwarya'), ('l3_414b', 'rodolfo')]
+    kb_predicates['possesses'] = [('l3_402', 'justin'), ('l3_404', 'scott'), ('l3_512', 'ray'), ('l3_510', 'dana'), ('l3_508','peter'), ('l3_420', 'shiqi'), ('l3_432', 'jivko'), ('l3_502', 'stacy'), ('l3_414b', 'jesse'), ('l3_414b', 'aishwarya'), ('l3_414b', 'rodolfo')]
 
     #Instantiate gounder with given kb predicates and ontology. 
     grounder = Grounder(ontology, perception_module=None, kb_predicates=kb_predicates, classifier_predicates=None)
@@ -397,7 +397,7 @@ def main():
                             post_process_action(action, recognize_stream)
 
                             #Send action to Segbot. 
-                            pass#action_sender.execute_plan_action_client(action)
+                            action_sender.execute_plan_action_client(action)
                         else:
                             print 'Ok, cancelling action...\n'
 
