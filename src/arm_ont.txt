@@ -1,0 +1,6 @@
+#For arm demo. 
+grab:<i,a>
+lift:<i,a>
+place:<i,a>
+
+the:<<i,t>,i>

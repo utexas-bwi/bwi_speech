@@ -1,0 +1,9 @@
+#Imperatives for arm.
+grab :- M/PP : lambda x:i.(grab(x))
+hold :- M/PP : lambda x:i.(grab(x))
+lift :- M/PP : lambda x:i.(lift(x))
+put down :- M/PP : lambda x:i.(place(x))
+drop :- M/PP : lambda x:i.(place(x))
+raise :- M/PP : lambda x:i.(lift(x))
+
+the :- NP/(N/N) : lambda P:<l,t>.(the(lambda x:l.(P(x))))
