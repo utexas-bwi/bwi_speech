@@ -34,16 +34,22 @@ import pyaudio
 from six.moves import queue
 import rospy
 
+
+path_stub = '/home/justin/UT/Research/CatkinWorkspaces/bwi_speech_catkin/src/'
+#path_stub = '/home/rcorona/catkin_ws/src'
+
 #TODO Change if necessary. 
 #Adds nlu_pipeline src folder in order to import modules from it. 
 #nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
-nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src' #For Bender
+nlu_pipeline_path = path_stub + 'bwi_speech/NLL/CkyParser/src'
+#nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src' #For Bender
 sys.path.append(nlu_pipeline_path)
 
 #TODO Change if necessary. 
 #Path to CKYParser
 #parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
-parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/arm_parser.pckl'
+#parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/arm_parser.pckl'
+parser_path = path_stub + 'bwi_speech/src/arm_parser.pckl'
 
 #Nlu pipeline modules.
 try:
@@ -58,6 +64,9 @@ try:
     #grounder_path = '/home/justin/UT/Research/Code/dialog_active_learning/src'
     #sys.path.append(grounder_path)
     from Grounder import Grounder
+
+    sys.path.append(path_stub + 'segbot_arm/segbot_arm_manipulation/src')
+    from arm_actions import *
 
 except ImportError, e:
     print 'ERROR: Unable to load nlu_pipeline_modules! Verify that nlu_pipeline_path is set correctly!'
@@ -74,6 +83,9 @@ CHUNK = int(RATE / 10)  # 100ms
 # * https://g.co/cloud/speech/limits#content
 DEADLINE_SECS = 60 * 3 + 5
 SPEECH_SCOPE = 'https://www.googleapis.com/auth/cloud-platform'
+
+table_scene = None
+grasped_state = None
 
 def replace_numbers_with_text(phrase): 
     phrase = phrase.replace('0', 'zero ')
@@ -320,10 +332,31 @@ def ground_parse_to_arm_action(parse):
     else:
         return None
 
-def do_arm_action(action): 
-    print action.name
+def do_arm_action(action):
+    if action.name == 'grasp':
+        print 'GRASP: ' + action.name
+        table_scene = arm_grasp()
+        wait_for_state()
+        grasped_state = current_state
+    if action.name == 'lift':
+        print 'LIFT: ' + action.name
+        arm_lift(table_scene)
+    if action.name == 'pickup':
+        print 'PICKUP: ' + action.name
+        table_scene = arm_grasp()
+        arm_lift(table_scene)
+    if action.name == 'place':
+        print 'PLACE: ' + action.name
+        arm_replacement(grasped_state)
+    if action.name == 'handover':
+        print 'HANDOVER: ' + action.name
+        arm_handover()
+    if action.name == 'open':
+        print 'OPEN: ' + action.name
+        open_finger()
 
 def main():
+    arm_node_init()
     service = cloud_speech_pb2.SpeechStub(
         make_channel('speech.googleapis.com', 443))
 
@@ -340,7 +373,8 @@ def main():
     action_sender = ActionSender(None, None, None)
 
     #Load ontology for use by grounder. 
-    ontology = Ontology('/home/rcorona/catkin_ws/src/bwi_speech/src/ont.txt')
+    #ontology = Ontology('/home/rcorona/catkin_ws/src/bwi_speech/src/ont.txt')
+    ontology = Ontology(path_stub + 'bwi_speech/src/ont.txt')
    
     #Predicates for our knowledge base. 
     kb_predicates = dict()
