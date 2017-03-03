@@ -355,6 +355,9 @@ def main():
     #Used to keep looping for as long as desired. 
     taking_input = True
 
+    #Keep track of user utterances. 
+    utterance_file = open('utterances.txt', 'a')
+
     while taking_input: 
         # For streaming audio from the microphone, there are three threads.
         # First, a thread that collects audio data as it comes in
@@ -375,6 +378,9 @@ def main():
 
                 print '\n*************'
                 print "TRANSCRIPT: " + response
+
+                #Keep track of what users say. 
+                utterance_file.write(response + '\n')
 
                 if response == 'exit' or response == 'quit':
                     #Stop listening and exit loop. 
@@ -409,6 +415,8 @@ def main():
                         print "Is this correct? (yes/no): " 
 
                         response = listen_print_loop(recognize_stream).strip()
+
+                        utterance_file.write(response + '\n')
 
                         if response == 'yes':
                             print 'OK, performing action...\n'
