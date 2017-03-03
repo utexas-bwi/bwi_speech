@@ -37,13 +37,13 @@ import rospy
 #TODO Change if necessary. 
 #Adds nlu_pipeline src folder in order to import modules from it. 
 #nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
-nlu_pipeline_path = '/home/users/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src' #For Bender
+nlu_pipeline_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src' #For Bender
 sys.path.append(nlu_pipeline_path)
 
 #TODO Change if necessary. 
 #Path to CKYParser
 #parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
-parser_path = '/home/users/rcorona/catkin_ws/src/bwi_speech/src/parser.cky'
+parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/src/arm_parser.pckl'
 
 #Nlu pipeline modules.
 try:
@@ -204,7 +204,12 @@ def request_stream(data_stream, rate, interim_results=True):
         # for a list of supported languages.
         language_code='en-US',  # a BCP-47 language tag
 
-        speech_context=SpeechContext(phrases=["ray's", "peter's", "jivko's", "shiqi's", "walk to", "run over to", "go to", "lab"]),
+        speech_context=SpeechContext(phrases=['bevo', 'longhorn', 'cow', 'plush toy', 'toy', 
+                                              'crayon', 'crayola', 'pink crayon', 'pink crayola', 'cylinder', 'pink cylinder',
+                                              'grasp', 'grab', 'hold', 'lift', 'raise', 'elevate', 'pick up', 'place', 
+                                              'put down', 'drop', 'hand', 'over' 'me' 'them',
+                                              'could', 'you', 'open', 'hand', 'claws', 'fingers', 'gripper', 'will', 'can', 'please'
+                                              ]),
     )
     streaming_config = cloud_speech_pb2.StreamingRecognitionConfig(
         interim_results=interim_results,
@@ -304,12 +309,26 @@ def post_process_action(action, recognize_stream):
 
     print action
 
+def ground_parse_to_arm_action(parse): 
+    valid_actions = ['grasp', 'lift', 'pickup', 'place', 'handover', 'open']
+ 
+    action, param = parse.split('(')
+    param = param.split(')')[0]
+
+    if action in valid_actions:
+        return Action(action, [param])
+    else:
+        return None
+
+def do_arm_action(action): 
+    print action.name
+
 def main():
     service = cloud_speech_pb2.SpeechStub(
         make_channel('speech.googleapis.com', 443))
 
     #Instantiate ROS node. 
-    rospy.init_node('speech_language_acquisition')
+#rospy.init_node('speech_language_acquisition')
 
     #Load parser from given path. 
     parser = load_obj_general(parser_path)
@@ -321,7 +340,7 @@ def main():
     action_sender = ActionSender(None, None, None)
 
     #Load ontology for use by grounder. 
-    ontology = Ontology('/home/users/rcorona/catkin_ws/src/bwi_speech/src/ont.txt')
+    ontology = Ontology('/home/rcorona/catkin_ws/src/bwi_speech/src/ont.txt')
    
     #Predicates for our knowledge base. 
     kb_predicates = dict()
@@ -360,22 +379,23 @@ def main():
                 if response == 'exit' or response == 'quit':
                     #Stop listening and exit loop. 
                     taking_input = False
+                    break
                 else:
                     #Parse it using parser.
                     response = tokenize_for_parser(response)
 
-            #TODO change this once we can hanlde longer phrases, it's an ugly hack. 
-		    if len(response.split()) > 7: 
-		        print 'Sorry, command too long to parse...'
-	                parse = 'invalid'
-	            else: 
-                        semantic_node = parser.most_likely_cky_parse(response).next()[0].node 
-                        parse = parser.print_parse(semantic_node)
+                #TODO change this once we can hanlde longer phrases, it's an ugly hack. 
+                if len(response.split()) > 7: 
+                    print 'Sorry, command too long to parse...'
+                    parse = 'invalid'
+                else: 
+                    semantic_node = parser.most_likely_cky_parse(response).next()[0].node 
+                    parse = parser.print_parse(semantic_node)
 
-                        print "PARSE: " + parse
+                    print "PARSE: " + parse
 
                     #Now ground.
-                    action = ground_parse_to_action(semantic_node, grounder)
+                    action = ground_parse_to_arm_action(parse)#ground_parse_to_action(semantic_node, grounder)
 
                     #Not a valid action. 
                     if type(action) == type(None):
@@ -394,10 +414,10 @@ def main():
                             print 'OK, performing action...\n'
 
                             #Post process action with further clarifications if necessary.
-                            post_process_action(action, recognize_stream)
+                            #post_process_action(action, recognize_stream)
 
                             #Send action to Segbot. 
-                            action_sender.execute_plan_action_client(action)
+                            do_arm_action(action)#action_sender.execute_plan_action_client(action)
                         else:
                             print 'Ok, cancelling action...\n'
 
@@ -411,6 +431,9 @@ def main():
 
             #If people take too long, this error comes up, ignore it. 
             except RuntimeError as e: 
+                pass
+
+            except:
                 pass
 
 
