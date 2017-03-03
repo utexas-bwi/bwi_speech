@@ -1,9 +1,37 @@
 #Imperatives for arm.
-grab :- M/PP : lambda x:i.(grab(x))
-hold :- M/PP : lambda x:i.(grab(x))
+grasp :- M/PP : lambda x:i.(grasp(x))
+grab :- M/PP : lambda x:i.(grasp(x))
+hold :- M/PP : lambda x:i.(grasp(x))
+
 lift :- M/PP : lambda x:i.(lift(x))
+raise :- M/PP : lambda x:i.(lift(x))
+elevate :- M/PP : lambda x:i.(lift(x))
+
+place :- M/PP : lambda x:i.(place(x))
 put down :- M/PP : lambda x:i.(place(x))
 drop :- M/PP : lambda x:i.(place(x))
-raise :- M/PP : lambda x:i.(lift(x))
 
-the :- NP/(N/N) : lambda P:<l,t>.(the(lambda x:l.(P(x))))
+pick up :- M/PP : lambda x:i.(pickup(x))
+
+hand over :- M/PP : lambda x:i.(handover(x))
+hand me :- M/PP : lambda x:i.(handover(x))
+give me :- M/PP : lambda x:i.(handover(x))
+hand them :- M/PP : lambda x:i.(handover(x))
+give them :- M/PP : lambda x:i.(handover(x))
+
+#Item surface forms. 
+bevo :- NP : bevo
+plush toy :- NP : bevo
+stuffed animal :- NP : bevo
+longhorn :- NP : bevo
+cow :- NP : bevo
+toy :- NP : bevo
+
+crayon :- NP : crayon
+pink crayon :- NP : crayon
+cylinder :- NP : crayon
+pink cylinder :- NP : crayon
+crayola :- NP : crayon
+pink crayola :- NP : crayon
+	
+the :- NP/(N/N) : lambda P:<i,t>.(the(lambda x:i.(P(x))))

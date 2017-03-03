@@ -1,4 +1,12 @@
+<A> <I>
 <A> the <I>
 can you <A> the <I>
+can you <A> <I>
 please <A> the <I>
+please <A> <I>
 i want you to <A> the <I>
+i want you to <A> <I>
+would you <A> <I>
+would you <A> the <I>
+could you <A> the <I>
+could you <A> <I>
