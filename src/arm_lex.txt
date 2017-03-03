@@ -1,23 +1,31 @@
 #Imperatives for arm.
-grasp :- M/PP : lambda x:i.(grasp(x))
-grab :- M/PP : lambda x:i.(grasp(x))
-hold :- M/PP : lambda x:i.(grasp(x))
+grasp :- M/NP : lambda x:i.(grasp(x))
+grab :- M/NP : lambda x:i.(grasp(x))
+hold :- M/NP : lambda x:i.(grasp(x))
 
-lift :- M/PP : lambda x:i.(lift(x))
-raise :- M/PP : lambda x:i.(lift(x))
-elevate :- M/PP : lambda x:i.(lift(x))
+lift :- M/NP : lambda x:i.(lift(x))
+raise :- M/NP : lambda x:i.(lift(x))
+elevate :- M/NP : lambda x:i.(lift(x))
 
-place :- M/PP : lambda x:i.(place(x))
-put down :- M/PP : lambda x:i.(place(x))
-drop :- M/PP : lambda x:i.(place(x))
+place :- M/NP : lambda x:i.(place(x))
+put down :- M/NP : lambda x:i.(place(x))
+drop :- M/NP : lambda x:i.(place(x))
 
-pick up :- M/PP : lambda x:i.(pickup(x))
+pick up :- M/NP : lambda x:i.(pickup(x))
 
-hand over :- M/PP : lambda x:i.(handover(x))
-hand me :- M/PP : lambda x:i.(handover(x))
-give me :- M/PP : lambda x:i.(handover(x))
-hand them :- M/PP : lambda x:i.(handover(x))
-give them :- M/PP : lambda x:i.(handover(x))
+hand over :- M/NP : lambda x:i.(handover(x))
+hand me :- M/NP : lambda x:i.(handover(x))
+give me :- M/NP : lambda x:i.(handover(x))
+hand them :- M/NP : lambda x:i.(handover(x))
+give them :- M/NP : lambda x:i.(handover(x))
+
+open :- M/NP : lambda x:i.(open(x)) 
+
+could you :- M/M : lambda x:a.(x)
+can you :- M/M : lambda x:a.(x)
+please :- M/M : lambda x:a.(x)
+would you :- M/M : lambda x:a.(x)
+i want you to :- M/M : lambda x:a.(x)
 
 #Item surface forms. 
 bevo :- NP : bevo
@@ -33,5 +41,12 @@ cylinder :- NP : crayon
 pink cylinder :- NP : crayon
 crayola :- NP : crayon
 pink crayola :- NP : crayon
-	
-the :- NP/(N/N) : lambda P:<i,t>.(the(lambda x:i.(P(x))))
+
+hand :- NP : gripper
+gripper :- NP : gripper
+fingers :- NP : gripper
+claws :- NP : gripper
+claw  :- NP : gripper
+
+the :- NP/NP : lambda x:i.(x)
+your :- NP/NP : lambda x:i.(x)

@@ -23,6 +23,8 @@ if __name__ == '__main__':
                ['handover', ['hand over', 'hand me', 'give me', 'hand them', 'give them']]
               ]
 
+    max_len = 7
+
     #Generate a phrase for every possible parameterization. 
     for template in templates: 
 
@@ -38,10 +40,12 @@ if __name__ == '__main__':
                     #All surface forms for this action. 
                     for action_surface_form in action_surface_forms: 
                         phrase = template.strip().replace('<I>', item_surface_form).replace('<A>', action_surface_form)
-                
                         semantic_form = 'M : ' + action_grounding + '(' + item_grounding + ')'
+                        write_line = phrase + '\n' + semantic_form + '\n\n'
 
-                        train_file.write(phrase + '\n' + semantic_form + '\n\n')
+                        #Phrases which have too many tokens will take too long to parse. 
+                        if len(phrase.strip().split()) < max_len: 
+                            train_file.write(write_line)
 
     #Close template file to open gripper one. 
 
@@ -56,8 +60,11 @@ if __name__ == '__main__':
             
             phrase = template.strip().replace('<H>', surface_form)
             semantic_form = 'M : open(gripper)'
+            write_line = phrase + '\n' + semantic_form + '\n\n'
 
-            train_file.write(phrase + '\n' + semantic_form + '\n\n')
+            #Phrases which have too many tokens will take too long to parse. 
+            if len(phrase.strip().split()) < max_len: 
+                train_file.write(write_line)
 
             
             

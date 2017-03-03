@@ -1,5 +1,5 @@
-<A> <I>
 <A> the <I>
+<A> <I>
 can you <A> the <I>
 can you <A> <I>
 please <A> the <I>

@@ -1,20 +1,14 @@
 #!/usr/bin/env python
 __author__ = 'jesse'
 
-import rospy
 import sys
 
-parser_path = '/home/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
+parser_path = '/scratch/cluster/rcorona/catkin_ws/src/bwi_speech/NLL/CkyParser/src/'
 sys.path.append(parser_path)
 
 import Ontology
 import Lexicon
-import KBGrounder
 import CKYParser
-import StaticDialogPolicy
-import ActionSender
-from TemplateBasedGenerator import TemplateBasedGenerator
-from StaticDialogAgent import StaticDialogAgent
 from utils import *
 
 print "reading in Ontology"
@@ -32,7 +26,7 @@ print "entries: " + str(lex.entries)
 
 parser = CKYParser.CKYParser(ont, lex, use_language_model=True)
 # Set parser hyperparams to best known values for training
-parser.max_multiword_expression = 2  # max span of a multi-word expression to be considered during tokenization
+parser.max_multiword_expression = 4  # max span of a multi-word expression to be considered during tokenization
 parser.max_new_senses_per_utterance = 3  # max number of new word senses that can be induced on a training example
 parser.max_cky_trees_per_token_sequence_beam = 100  # for tokenization of an utterance, max cky trees considered
 parser.max_hypothesis_categories_for_unknown_token_beam = 3  # for unknown token, max syntax categories tried

@@ -1,543 +1,3 @@
-grasp bevo
-M : grasp(bevo)
-
-grab bevo
-M : grasp(bevo)
-
-hold bevo
-M : grasp(bevo)
-
-lift bevo
-M : lift(bevo)
-
-raise bevo
-M : lift(bevo)
-
-elevate bevo
-M : lift(bevo)
-
-pick up bevo
-M : pickup(bevo)
-
-place bevo
-M : place(bevo)
-
-put down bevo
-M : place(bevo)
-
-drop bevo
-M : place(bevo)
-
-hand over bevo
-M : handover(bevo)
-
-hand me bevo
-M : handover(bevo)
-
-give me bevo
-M : handover(bevo)
-
-hand them bevo
-M : handover(bevo)
-
-give them bevo
-M : handover(bevo)
-
-grasp plush toy
-M : grasp(bevo)
-
-grab plush toy
-M : grasp(bevo)
-
-hold plush toy
-M : grasp(bevo)
-
-lift plush toy
-M : lift(bevo)
-
-raise plush toy
-M : lift(bevo)
-
-elevate plush toy
-M : lift(bevo)
-
-pick up plush toy
-M : pickup(bevo)
-
-place plush toy
-M : place(bevo)
-
-put down plush toy
-M : place(bevo)
-
-drop plush toy
-M : place(bevo)
-
-hand over plush toy
-M : handover(bevo)
-
-hand me plush toy
-M : handover(bevo)
-
-give me plush toy
-M : handover(bevo)
-
-hand them plush toy
-M : handover(bevo)
-
-give them plush toy
-M : handover(bevo)
-
-grasp stuffed animal
-M : grasp(bevo)
-
-grab stuffed animal
-M : grasp(bevo)
-
-hold stuffed animal
-M : grasp(bevo)
-
-lift stuffed animal
-M : lift(bevo)
-
-raise stuffed animal
-M : lift(bevo)
-
-elevate stuffed animal
-M : lift(bevo)
-
-pick up stuffed animal
-M : pickup(bevo)
-
-place stuffed animal
-M : place(bevo)
-
-put down stuffed animal
-M : place(bevo)
-
-drop stuffed animal
-M : place(bevo)
-
-hand over stuffed animal
-M : handover(bevo)
-
-hand me stuffed animal
-M : handover(bevo)
-
-give me stuffed animal
-M : handover(bevo)
-
-hand them stuffed animal
-M : handover(bevo)
-
-give them stuffed animal
-M : handover(bevo)
-
-grasp longhorn
-M : grasp(bevo)
-
-grab longhorn
-M : grasp(bevo)
-
-hold longhorn
-M : grasp(bevo)
-
-lift longhorn
-M : lift(bevo)
-
-raise longhorn
-M : lift(bevo)
-
-elevate longhorn
-M : lift(bevo)
-
-pick up longhorn
-M : pickup(bevo)
-
-place longhorn
-M : place(bevo)
-
-put down longhorn
-M : place(bevo)
-
-drop longhorn
-M : place(bevo)
-
-hand over longhorn
-M : handover(bevo)
-
-hand me longhorn
-M : handover(bevo)
-
-give me longhorn
-M : handover(bevo)
-
-hand them longhorn
-M : handover(bevo)
-
-give them longhorn
-M : handover(bevo)
-
-grasp cow
-M : grasp(bevo)
-
-grab cow
-M : grasp(bevo)
-
-hold cow
-M : grasp(bevo)
-
-lift cow
-M : lift(bevo)
-
-raise cow
-M : lift(bevo)
-
-elevate cow
-M : lift(bevo)
-
-pick up cow
-M : pickup(bevo)
-
-place cow
-M : place(bevo)
-
-put down cow
-M : place(bevo)
-
-drop cow
-M : place(bevo)
-
-hand over cow
-M : handover(bevo)
-
-hand me cow
-M : handover(bevo)
-
-give me cow
-M : handover(bevo)
-
-hand them cow
-M : handover(bevo)
-
-give them cow
-M : handover(bevo)
-
-grasp toy
-M : grasp(bevo)
-
-grab toy
-M : grasp(bevo)
-
-hold toy
-M : grasp(bevo)
-
-lift toy
-M : lift(bevo)
-
-raise toy
-M : lift(bevo)
-
-elevate toy
-M : lift(bevo)
-
-pick up toy
-M : pickup(bevo)
-
-place toy
-M : place(bevo)
-
-put down toy
-M : place(bevo)
-
-drop toy
-M : place(bevo)
-
-hand over toy
-M : handover(bevo)
-
-hand me toy
-M : handover(bevo)
-
-give me toy
-M : handover(bevo)
-
-hand them toy
-M : handover(bevo)
-
-give them toy
-M : handover(bevo)
-
-grasp crayon
-M : grasp(crayon)
-
-grab crayon
-M : grasp(crayon)
-
-hold crayon
-M : grasp(crayon)
-
-lift crayon
-M : lift(crayon)
-
-raise crayon
-M : lift(crayon)
-
-elevate crayon
-M : lift(crayon)
-
-pick up crayon
-M : pickup(crayon)
-
-place crayon
-M : place(crayon)
-
-put down crayon
-M : place(crayon)
-
-drop crayon
-M : place(crayon)
-
-hand over crayon
-M : handover(crayon)
-
-hand me crayon
-M : handover(crayon)
-
-give me crayon
-M : handover(crayon)
-
-hand them crayon
-M : handover(crayon)
-
-give them crayon
-M : handover(crayon)
-
-grasp pink crayon
-M : grasp(crayon)
-
-grab pink crayon
-M : grasp(crayon)
-
-hold pink crayon
-M : grasp(crayon)
-
-lift pink crayon
-M : lift(crayon)
-
-raise pink crayon
-M : lift(crayon)
-
-elevate pink crayon
-M : lift(crayon)
-
-pick up pink crayon
-M : pickup(crayon)
-
-place pink crayon
-M : place(crayon)
-
-put down pink crayon
-M : place(crayon)
-
-drop pink crayon
-M : place(crayon)
-
-hand over pink crayon
-M : handover(crayon)
-
-hand me pink crayon
-M : handover(crayon)
-
-give me pink crayon
-M : handover(crayon)
-
-hand them pink crayon
-M : handover(crayon)
-
-give them pink crayon
-M : handover(crayon)
-
-grasp cylinder
-M : grasp(crayon)
-
-grab cylinder
-M : grasp(crayon)
-
-hold cylinder
-M : grasp(crayon)
-
-lift cylinder
-M : lift(crayon)
-
-raise cylinder
-M : lift(crayon)
-
-elevate cylinder
-M : lift(crayon)
-
-pick up cylinder
-M : pickup(crayon)
-
-place cylinder
-M : place(crayon)
-
-put down cylinder
-M : place(crayon)
-
-drop cylinder
-M : place(crayon)
-
-hand over cylinder
-M : handover(crayon)
-
-hand me cylinder
-M : handover(crayon)
-
-give me cylinder
-M : handover(crayon)
-
-hand them cylinder
-M : handover(crayon)
-
-give them cylinder
-M : handover(crayon)
-
-grasp pink cylinder
-M : grasp(crayon)
-
-grab pink cylinder
-M : grasp(crayon)
-
-hold pink cylinder
-M : grasp(crayon)
-
-lift pink cylinder
-M : lift(crayon)
-
-raise pink cylinder
-M : lift(crayon)
-
-elevate pink cylinder
-M : lift(crayon)
-
-pick up pink cylinder
-M : pickup(crayon)
-
-place pink cylinder
-M : place(crayon)
-
-put down pink cylinder
-M : place(crayon)
-
-drop pink cylinder
-M : place(crayon)
-
-hand over pink cylinder
-M : handover(crayon)
-
-hand me pink cylinder
-M : handover(crayon)
-
-give me pink cylinder
-M : handover(crayon)
-
-hand them pink cylinder
-M : handover(crayon)
-
-give them pink cylinder
-M : handover(crayon)
-
-grasp crayola
-M : grasp(crayon)
-
-grab crayola
-M : grasp(crayon)
-
-hold crayola
-M : grasp(crayon)
-
-lift crayola
-M : lift(crayon)
-
-raise crayola
-M : lift(crayon)
-
-elevate crayola
-M : lift(crayon)
-
-pick up crayola
-M : pickup(crayon)
-
-place crayola
-M : place(crayon)
-
-put down crayola
-M : place(crayon)
-
-drop crayola
-M : place(crayon)
-
-hand over crayola
-M : handover(crayon)
-
-hand me crayola
-M : handover(crayon)
-
-give me crayola
-M : handover(crayon)
-
-hand them crayola
-M : handover(crayon)
-
-give them crayola
-M : handover(crayon)
-
-grasp pink crayola
-M : grasp(crayon)
-
-grab pink crayola
-M : grasp(crayon)
-
-hold pink crayola
-M : grasp(crayon)
-
-lift pink crayola
-M : lift(crayon)
-
-raise pink crayola
-M : lift(crayon)
-
-elevate pink crayola
-M : lift(crayon)
-
-pick up pink crayola
-M : pickup(crayon)
-
-place pink crayola
-M : place(crayon)
-
-put down pink crayola
-M : place(crayon)
-
-drop pink crayola
-M : place(crayon)
-
-hand over pink crayola
-M : handover(crayon)
-
-hand me pink crayola
-M : handover(crayon)
-
-give me pink crayola
-M : handover(crayon)
-
-hand them pink crayola
-M : handover(crayon)
-
-give them pink crayola
-M : handover(crayon)
-
 grasp the bevo
 M : grasp(bevo)
 
@@ -1078,6 +538,546 @@ M : handover(crayon)
 give them the pink crayola
 M : handover(crayon)
 
+grasp bevo
+M : grasp(bevo)
+
+grab bevo
+M : grasp(bevo)
+
+hold bevo
+M : grasp(bevo)
+
+lift bevo
+M : lift(bevo)
+
+raise bevo
+M : lift(bevo)
+
+elevate bevo
+M : lift(bevo)
+
+pick up bevo
+M : pickup(bevo)
+
+place bevo
+M : place(bevo)
+
+put down bevo
+M : place(bevo)
+
+drop bevo
+M : place(bevo)
+
+hand over bevo
+M : handover(bevo)
+
+hand me bevo
+M : handover(bevo)
+
+give me bevo
+M : handover(bevo)
+
+hand them bevo
+M : handover(bevo)
+
+give them bevo
+M : handover(bevo)
+
+grasp plush toy
+M : grasp(bevo)
+
+grab plush toy
+M : grasp(bevo)
+
+hold plush toy
+M : grasp(bevo)
+
+lift plush toy
+M : lift(bevo)
+
+raise plush toy
+M : lift(bevo)
+
+elevate plush toy
+M : lift(bevo)
+
+pick up plush toy
+M : pickup(bevo)
+
+place plush toy
+M : place(bevo)
+
+put down plush toy
+M : place(bevo)
+
+drop plush toy
+M : place(bevo)
+
+hand over plush toy
+M : handover(bevo)
+
+hand me plush toy
+M : handover(bevo)
+
+give me plush toy
+M : handover(bevo)
+
+hand them plush toy
+M : handover(bevo)
+
+give them plush toy
+M : handover(bevo)
+
+grasp stuffed animal
+M : grasp(bevo)
+
+grab stuffed animal
+M : grasp(bevo)
+
+hold stuffed animal
+M : grasp(bevo)
+
+lift stuffed animal
+M : lift(bevo)
+
+raise stuffed animal
+M : lift(bevo)
+
+elevate stuffed animal
+M : lift(bevo)
+
+pick up stuffed animal
+M : pickup(bevo)
+
+place stuffed animal
+M : place(bevo)
+
+put down stuffed animal
+M : place(bevo)
+
+drop stuffed animal
+M : place(bevo)
+
+hand over stuffed animal
+M : handover(bevo)
+
+hand me stuffed animal
+M : handover(bevo)
+
+give me stuffed animal
+M : handover(bevo)
+
+hand them stuffed animal
+M : handover(bevo)
+
+give them stuffed animal
+M : handover(bevo)
+
+grasp longhorn
+M : grasp(bevo)
+
+grab longhorn
+M : grasp(bevo)
+
+hold longhorn
+M : grasp(bevo)
+
+lift longhorn
+M : lift(bevo)
+
+raise longhorn
+M : lift(bevo)
+
+elevate longhorn
+M : lift(bevo)
+
+pick up longhorn
+M : pickup(bevo)
+
+place longhorn
+M : place(bevo)
+
+put down longhorn
+M : place(bevo)
+
+drop longhorn
+M : place(bevo)
+
+hand over longhorn
+M : handover(bevo)
+
+hand me longhorn
+M : handover(bevo)
+
+give me longhorn
+M : handover(bevo)
+
+hand them longhorn
+M : handover(bevo)
+
+give them longhorn
+M : handover(bevo)
+
+grasp cow
+M : grasp(bevo)
+
+grab cow
+M : grasp(bevo)
+
+hold cow
+M : grasp(bevo)
+
+lift cow
+M : lift(bevo)
+
+raise cow
+M : lift(bevo)
+
+elevate cow
+M : lift(bevo)
+
+pick up cow
+M : pickup(bevo)
+
+place cow
+M : place(bevo)
+
+put down cow
+M : place(bevo)
+
+drop cow
+M : place(bevo)
+
+hand over cow
+M : handover(bevo)
+
+hand me cow
+M : handover(bevo)
+
+give me cow
+M : handover(bevo)
+
+hand them cow
+M : handover(bevo)
+
+give them cow
+M : handover(bevo)
+
+grasp toy
+M : grasp(bevo)
+
+grab toy
+M : grasp(bevo)
+
+hold toy
+M : grasp(bevo)
+
+lift toy
+M : lift(bevo)
+
+raise toy
+M : lift(bevo)
+
+elevate toy
+M : lift(bevo)
+
+pick up toy
+M : pickup(bevo)
+
+place toy
+M : place(bevo)
+
+put down toy
+M : place(bevo)
+
+drop toy
+M : place(bevo)
+
+hand over toy
+M : handover(bevo)
+
+hand me toy
+M : handover(bevo)
+
+give me toy
+M : handover(bevo)
+
+hand them toy
+M : handover(bevo)
+
+give them toy
+M : handover(bevo)
+
+grasp crayon
+M : grasp(crayon)
+
+grab crayon
+M : grasp(crayon)
+
+hold crayon
+M : grasp(crayon)
+
+lift crayon
+M : lift(crayon)
+
+raise crayon
+M : lift(crayon)
+
+elevate crayon
+M : lift(crayon)
+
+pick up crayon
+M : pickup(crayon)
+
+place crayon
+M : place(crayon)
+
+put down crayon
+M : place(crayon)
+
+drop crayon
+M : place(crayon)
+
+hand over crayon
+M : handover(crayon)
+
+hand me crayon
+M : handover(crayon)
+
+give me crayon
+M : handover(crayon)
+
+hand them crayon
+M : handover(crayon)
+
+give them crayon
+M : handover(crayon)
+
+grasp pink crayon
+M : grasp(crayon)
+
+grab pink crayon
+M : grasp(crayon)
+
+hold pink crayon
+M : grasp(crayon)
+
+lift pink crayon
+M : lift(crayon)
+
+raise pink crayon
+M : lift(crayon)
+
+elevate pink crayon
+M : lift(crayon)
+
+pick up pink crayon
+M : pickup(crayon)
+
+place pink crayon
+M : place(crayon)
+
+put down pink crayon
+M : place(crayon)
+
+drop pink crayon
+M : place(crayon)
+
+hand over pink crayon
+M : handover(crayon)
+
+hand me pink crayon
+M : handover(crayon)
+
+give me pink crayon
+M : handover(crayon)
+
+hand them pink crayon
+M : handover(crayon)
+
+give them pink crayon
+M : handover(crayon)
+
+grasp cylinder
+M : grasp(crayon)
+
+grab cylinder
+M : grasp(crayon)
+
+hold cylinder
+M : grasp(crayon)
+
+lift cylinder
+M : lift(crayon)
+
+raise cylinder
+M : lift(crayon)
+
+elevate cylinder
+M : lift(crayon)
+
+pick up cylinder
+M : pickup(crayon)
+
+place cylinder
+M : place(crayon)
+
+put down cylinder
+M : place(crayon)
+
+drop cylinder
+M : place(crayon)
+
+hand over cylinder
+M : handover(crayon)
+
+hand me cylinder
+M : handover(crayon)
+
+give me cylinder
+M : handover(crayon)
+
+hand them cylinder
+M : handover(crayon)
+
+give them cylinder
+M : handover(crayon)
+
+grasp pink cylinder
+M : grasp(crayon)
+
+grab pink cylinder
+M : grasp(crayon)
+
+hold pink cylinder
+M : grasp(crayon)
+
+lift pink cylinder
+M : lift(crayon)
+
+raise pink cylinder
+M : lift(crayon)
+
+elevate pink cylinder
+M : lift(crayon)
+
+pick up pink cylinder
+M : pickup(crayon)
+
+place pink cylinder
+M : place(crayon)
+
+put down pink cylinder
+M : place(crayon)
+
+drop pink cylinder
+M : place(crayon)
+
+hand over pink cylinder
+M : handover(crayon)
+
+hand me pink cylinder
+M : handover(crayon)
+
+give me pink cylinder
+M : handover(crayon)
+
+hand them pink cylinder
+M : handover(crayon)
+
+give them pink cylinder
+M : handover(crayon)
+
+grasp crayola
+M : grasp(crayon)
+
+grab crayola
+M : grasp(crayon)
+
+hold crayola
+M : grasp(crayon)
+
+lift crayola
+M : lift(crayon)
+
+raise crayola
+M : lift(crayon)
+
+elevate crayola
+M : lift(crayon)
+
+pick up crayola
+M : pickup(crayon)
+
+place crayola
+M : place(crayon)
+
+put down crayola
+M : place(crayon)
+
+drop crayola
+M : place(crayon)
+
+hand over crayola
+M : handover(crayon)
+
+hand me crayola
+M : handover(crayon)
+
+give me crayola
+M : handover(crayon)
+
+hand them crayola
+M : handover(crayon)
+
+give them crayola
+M : handover(crayon)
+
+grasp pink crayola
+M : grasp(crayon)
+
+grab pink crayola
+M : grasp(crayon)
+
+hold pink crayola
+M : grasp(crayon)
+
+lift pink crayola
+M : lift(crayon)
+
+raise pink crayola
+M : lift(crayon)
+
+elevate pink crayola
+M : lift(crayon)
+
+pick up pink crayola
+M : pickup(crayon)
+
+place pink crayola
+M : place(crayon)
+
+put down pink crayola
+M : place(crayon)
+
+drop pink crayola
+M : place(crayon)
+
+hand over pink crayola
+M : handover(crayon)
+
+hand me pink crayola
+M : handover(crayon)
+
+give me pink crayola
+M : handover(crayon)
+
+hand them pink crayola
+M : handover(crayon)
+
+give them pink crayola
+M : handover(crayon)
+
 can you grasp the bevo
 M : grasp(bevo)
 
@@ -1141,32 +1141,11 @@ M : lift(bevo)
 can you elevate the plush toy
 M : lift(bevo)
 
-can you pick up the plush toy
-M : pickup(bevo)
-
 can you place the plush toy
-M : place(bevo)
-
-can you put down the plush toy
 M : place(bevo)
 
 can you drop the plush toy
 M : place(bevo)
-
-can you hand over the plush toy
-M : handover(bevo)
-
-can you hand me the plush toy
-M : handover(bevo)
-
-can you give me the plush toy
-M : handover(bevo)
-
-can you hand them the plush toy
-M : handover(bevo)
-
-can you give them the plush toy
-M : handover(bevo)
 
 can you grasp the stuffed animal
 M : grasp(bevo)
@@ -1186,32 +1165,11 @@ M : lift(bevo)
 can you elevate the stuffed animal
 M : lift(bevo)
 
-can you pick up the stuffed animal
-M : pickup(bevo)
-
 can you place the stuffed animal
-M : place(bevo)
-
-can you put down the stuffed animal
 M : place(bevo)
 
 can you drop the stuffed animal
 M : place(bevo)
-
-can you hand over the stuffed animal
-M : handover(bevo)
-
-can you hand me the stuffed animal
-M : handover(bevo)
-
-can you give me the stuffed animal
-M : handover(bevo)
-
-can you hand them the stuffed animal
-M : handover(bevo)
-
-can you give them the stuffed animal
-M : handover(bevo)
 
 can you grasp the longhorn
 M : grasp(bevo)
@@ -1411,32 +1369,11 @@ M : lift(crayon)
 can you elevate the pink crayon
 M : lift(crayon)
 
-can you pick up the pink crayon
-M : pickup(crayon)
-
 can you place the pink crayon
-M : place(crayon)
-
-can you put down the pink crayon
 M : place(crayon)
 
 can you drop the pink crayon
 M : place(crayon)
-
-can you hand over the pink crayon
-M : handover(crayon)
-
-can you hand me the pink crayon
-M : handover(crayon)
-
-can you give me the pink crayon
-M : handover(crayon)
-
-can you hand them the pink crayon
-M : handover(crayon)
-
-can you give them the pink crayon
-M : handover(crayon)
 
 can you grasp the cylinder
 M : grasp(crayon)
@@ -1501,32 +1438,11 @@ M : lift(crayon)
 can you elevate the pink cylinder
 M : lift(crayon)
 
-can you pick up the pink cylinder
-M : pickup(crayon)
-
 can you place the pink cylinder
-M : place(crayon)
-
-can you put down the pink cylinder
 M : place(crayon)
 
 can you drop the pink cylinder
 M : place(crayon)
-
-can you hand over the pink cylinder
-M : handover(crayon)
-
-can you hand me the pink cylinder
-M : handover(crayon)
-
-can you give me the pink cylinder
-M : handover(crayon)
-
-can you hand them the pink cylinder
-M : handover(crayon)
-
-can you give them the pink cylinder
-M : handover(crayon)
 
 can you grasp the crayola
 M : grasp(crayon)
@@ -1591,32 +1507,11 @@ M : lift(crayon)
 can you elevate the pink crayola
 M : lift(crayon)
 
-can you pick up the pink crayola
-M : pickup(crayon)
-
 can you place the pink crayola
-M : place(crayon)
-
-can you put down the pink crayola
 M : place(crayon)
 
 can you drop the pink crayola
 M : place(crayon)
-
-can you hand over the pink crayola
-M : handover(crayon)
-
-can you hand me the pink crayola
-M : handover(crayon)
-
-can you give me the pink crayola
-M : handover(crayon)
-
-can you hand them the pink crayola
-M : handover(crayon)
-
-can you give them the pink crayola
-M : handover(crayon)
 
 can you grasp bevo
 M : grasp(bevo)
@@ -3238,546 +3133,6 @@ M : handover(crayon)
 please give them pink crayola
 M : handover(crayon)
 
-i want you to grasp the bevo
-M : grasp(bevo)
-
-i want you to grab the bevo
-M : grasp(bevo)
-
-i want you to hold the bevo
-M : grasp(bevo)
-
-i want you to lift the bevo
-M : lift(bevo)
-
-i want you to raise the bevo
-M : lift(bevo)
-
-i want you to elevate the bevo
-M : lift(bevo)
-
-i want you to pick up the bevo
-M : pickup(bevo)
-
-i want you to place the bevo
-M : place(bevo)
-
-i want you to put down the bevo
-M : place(bevo)
-
-i want you to drop the bevo
-M : place(bevo)
-
-i want you to hand over the bevo
-M : handover(bevo)
-
-i want you to hand me the bevo
-M : handover(bevo)
-
-i want you to give me the bevo
-M : handover(bevo)
-
-i want you to hand them the bevo
-M : handover(bevo)
-
-i want you to give them the bevo
-M : handover(bevo)
-
-i want you to grasp the plush toy
-M : grasp(bevo)
-
-i want you to grab the plush toy
-M : grasp(bevo)
-
-i want you to hold the plush toy
-M : grasp(bevo)
-
-i want you to lift the plush toy
-M : lift(bevo)
-
-i want you to raise the plush toy
-M : lift(bevo)
-
-i want you to elevate the plush toy
-M : lift(bevo)
-
-i want you to pick up the plush toy
-M : pickup(bevo)
-
-i want you to place the plush toy
-M : place(bevo)
-
-i want you to put down the plush toy
-M : place(bevo)
-
-i want you to drop the plush toy
-M : place(bevo)
-
-i want you to hand over the plush toy
-M : handover(bevo)
-
-i want you to hand me the plush toy
-M : handover(bevo)
-
-i want you to give me the plush toy
-M : handover(bevo)
-
-i want you to hand them the plush toy
-M : handover(bevo)
-
-i want you to give them the plush toy
-M : handover(bevo)
-
-i want you to grasp the stuffed animal
-M : grasp(bevo)
-
-i want you to grab the stuffed animal
-M : grasp(bevo)
-
-i want you to hold the stuffed animal
-M : grasp(bevo)
-
-i want you to lift the stuffed animal
-M : lift(bevo)
-
-i want you to raise the stuffed animal
-M : lift(bevo)
-
-i want you to elevate the stuffed animal
-M : lift(bevo)
-
-i want you to pick up the stuffed animal
-M : pickup(bevo)
-
-i want you to place the stuffed animal
-M : place(bevo)
-
-i want you to put down the stuffed animal
-M : place(bevo)
-
-i want you to drop the stuffed animal
-M : place(bevo)
-
-i want you to hand over the stuffed animal
-M : handover(bevo)
-
-i want you to hand me the stuffed animal
-M : handover(bevo)
-
-i want you to give me the stuffed animal
-M : handover(bevo)
-
-i want you to hand them the stuffed animal
-M : handover(bevo)
-
-i want you to give them the stuffed animal
-M : handover(bevo)
-
-i want you to grasp the longhorn
-M : grasp(bevo)
-
-i want you to grab the longhorn
-M : grasp(bevo)
-
-i want you to hold the longhorn
-M : grasp(bevo)
-
-i want you to lift the longhorn
-M : lift(bevo)
-
-i want you to raise the longhorn
-M : lift(bevo)
-
-i want you to elevate the longhorn
-M : lift(bevo)
-
-i want you to pick up the longhorn
-M : pickup(bevo)
-
-i want you to place the longhorn
-M : place(bevo)
-
-i want you to put down the longhorn
-M : place(bevo)
-
-i want you to drop the longhorn
-M : place(bevo)
-
-i want you to hand over the longhorn
-M : handover(bevo)
-
-i want you to hand me the longhorn
-M : handover(bevo)
-
-i want you to give me the longhorn
-M : handover(bevo)
-
-i want you to hand them the longhorn
-M : handover(bevo)
-
-i want you to give them the longhorn
-M : handover(bevo)
-
-i want you to grasp the cow
-M : grasp(bevo)
-
-i want you to grab the cow
-M : grasp(bevo)
-
-i want you to hold the cow
-M : grasp(bevo)
-
-i want you to lift the cow
-M : lift(bevo)
-
-i want you to raise the cow
-M : lift(bevo)
-
-i want you to elevate the cow
-M : lift(bevo)
-
-i want you to pick up the cow
-M : pickup(bevo)
-
-i want you to place the cow
-M : place(bevo)
-
-i want you to put down the cow
-M : place(bevo)
-
-i want you to drop the cow
-M : place(bevo)
-
-i want you to hand over the cow
-M : handover(bevo)
-
-i want you to hand me the cow
-M : handover(bevo)
-
-i want you to give me the cow
-M : handover(bevo)
-
-i want you to hand them the cow
-M : handover(bevo)
-
-i want you to give them the cow
-M : handover(bevo)
-
-i want you to grasp the toy
-M : grasp(bevo)
-
-i want you to grab the toy
-M : grasp(bevo)
-
-i want you to hold the toy
-M : grasp(bevo)
-
-i want you to lift the toy
-M : lift(bevo)
-
-i want you to raise the toy
-M : lift(bevo)
-
-i want you to elevate the toy
-M : lift(bevo)
-
-i want you to pick up the toy
-M : pickup(bevo)
-
-i want you to place the toy
-M : place(bevo)
-
-i want you to put down the toy
-M : place(bevo)
-
-i want you to drop the toy
-M : place(bevo)
-
-i want you to hand over the toy
-M : handover(bevo)
-
-i want you to hand me the toy
-M : handover(bevo)
-
-i want you to give me the toy
-M : handover(bevo)
-
-i want you to hand them the toy
-M : handover(bevo)
-
-i want you to give them the toy
-M : handover(bevo)
-
-i want you to grasp the crayon
-M : grasp(crayon)
-
-i want you to grab the crayon
-M : grasp(crayon)
-
-i want you to hold the crayon
-M : grasp(crayon)
-
-i want you to lift the crayon
-M : lift(crayon)
-
-i want you to raise the crayon
-M : lift(crayon)
-
-i want you to elevate the crayon
-M : lift(crayon)
-
-i want you to pick up the crayon
-M : pickup(crayon)
-
-i want you to place the crayon
-M : place(crayon)
-
-i want you to put down the crayon
-M : place(crayon)
-
-i want you to drop the crayon
-M : place(crayon)
-
-i want you to hand over the crayon
-M : handover(crayon)
-
-i want you to hand me the crayon
-M : handover(crayon)
-
-i want you to give me the crayon
-M : handover(crayon)
-
-i want you to hand them the crayon
-M : handover(crayon)
-
-i want you to give them the crayon
-M : handover(crayon)
-
-i want you to grasp the pink crayon
-M : grasp(crayon)
-
-i want you to grab the pink crayon
-M : grasp(crayon)
-
-i want you to hold the pink crayon
-M : grasp(crayon)
-
-i want you to lift the pink crayon
-M : lift(crayon)
-
-i want you to raise the pink crayon
-M : lift(crayon)
-
-i want you to elevate the pink crayon
-M : lift(crayon)
-
-i want you to pick up the pink crayon
-M : pickup(crayon)
-
-i want you to place the pink crayon
-M : place(crayon)
-
-i want you to put down the pink crayon
-M : place(crayon)
-
-i want you to drop the pink crayon
-M : place(crayon)
-
-i want you to hand over the pink crayon
-M : handover(crayon)
-
-i want you to hand me the pink crayon
-M : handover(crayon)
-
-i want you to give me the pink crayon
-M : handover(crayon)
-
-i want you to hand them the pink crayon
-M : handover(crayon)
-
-i want you to give them the pink crayon
-M : handover(crayon)
-
-i want you to grasp the cylinder
-M : grasp(crayon)
-
-i want you to grab the cylinder
-M : grasp(crayon)
-
-i want you to hold the cylinder
-M : grasp(crayon)
-
-i want you to lift the cylinder
-M : lift(crayon)
-
-i want you to raise the cylinder
-M : lift(crayon)
-
-i want you to elevate the cylinder
-M : lift(crayon)
-
-i want you to pick up the cylinder
-M : pickup(crayon)
-
-i want you to place the cylinder
-M : place(crayon)
-
-i want you to put down the cylinder
-M : place(crayon)
-
-i want you to drop the cylinder
-M : place(crayon)
-
-i want you to hand over the cylinder
-M : handover(crayon)
-
-i want you to hand me the cylinder
-M : handover(crayon)
-
-i want you to give me the cylinder
-M : handover(crayon)
-
-i want you to hand them the cylinder
-M : handover(crayon)
-
-i want you to give them the cylinder
-M : handover(crayon)
-
-i want you to grasp the pink cylinder
-M : grasp(crayon)
-
-i want you to grab the pink cylinder
-M : grasp(crayon)
-
-i want you to hold the pink cylinder
-M : grasp(crayon)
-
-i want you to lift the pink cylinder
-M : lift(crayon)
-
-i want you to raise the pink cylinder
-M : lift(crayon)
-
-i want you to elevate the pink cylinder
-M : lift(crayon)
-
-i want you to pick up the pink cylinder
-M : pickup(crayon)
-
-i want you to place the pink cylinder
-M : place(crayon)
-
-i want you to put down the pink cylinder
-M : place(crayon)
-
-i want you to drop the pink cylinder
-M : place(crayon)
-
-i want you to hand over the pink cylinder
-M : handover(crayon)
-
-i want you to hand me the pink cylinder
-M : handover(crayon)
-
-i want you to give me the pink cylinder
-M : handover(crayon)
-
-i want you to hand them the pink cylinder
-M : handover(crayon)
-
-i want you to give them the pink cylinder
-M : handover(crayon)
-
-i want you to grasp the crayola
-M : grasp(crayon)
-
-i want you to grab the crayola
-M : grasp(crayon)
-
-i want you to hold the crayola
-M : grasp(crayon)
-
-i want you to lift the crayola
-M : lift(crayon)
-
-i want you to raise the crayola
-M : lift(crayon)
-
-i want you to elevate the crayola
-M : lift(crayon)
-
-i want you to pick up the crayola
-M : pickup(crayon)
-
-i want you to place the crayola
-M : place(crayon)
-
-i want you to put down the crayola
-M : place(crayon)
-
-i want you to drop the crayola
-M : place(crayon)
-
-i want you to hand over the crayola
-M : handover(crayon)
-
-i want you to hand me the crayola
-M : handover(crayon)
-
-i want you to give me the crayola
-M : handover(crayon)
-
-i want you to hand them the crayola
-M : handover(crayon)
-
-i want you to give them the crayola
-M : handover(crayon)
-
-i want you to grasp the pink crayola
-M : grasp(crayon)
-
-i want you to grab the pink crayola
-M : grasp(crayon)
-
-i want you to hold the pink crayola
-M : grasp(crayon)
-
-i want you to lift the pink crayola
-M : lift(crayon)
-
-i want you to raise the pink crayola
-M : lift(crayon)
-
-i want you to elevate the pink crayola
-M : lift(crayon)
-
-i want you to pick up the pink crayola
-M : pickup(crayon)
-
-i want you to place the pink crayola
-M : place(crayon)
-
-i want you to put down the pink crayola
-M : place(crayon)
-
-i want you to drop the pink crayola
-M : place(crayon)
-
-i want you to hand over the pink crayola
-M : handover(crayon)
-
-i want you to hand me the pink crayola
-M : handover(crayon)
-
-i want you to give me the pink crayola
-M : handover(crayon)
-
-i want you to hand them the pink crayola
-M : handover(crayon)
-
-i want you to give them the pink crayola
-M : handover(crayon)
-
 i want you to grasp bevo
 M : grasp(bevo)
 
@@ -3796,122 +3151,11 @@ M : lift(bevo)
 i want you to elevate bevo
 M : lift(bevo)
 
-i want you to pick up bevo
-M : pickup(bevo)
-
 i want you to place bevo
-M : place(bevo)
-
-i want you to put down bevo
 M : place(bevo)
 
 i want you to drop bevo
 M : place(bevo)
-
-i want you to hand over bevo
-M : handover(bevo)
-
-i want you to hand me bevo
-M : handover(bevo)
-
-i want you to give me bevo
-M : handover(bevo)
-
-i want you to hand them bevo
-M : handover(bevo)
-
-i want you to give them bevo
-M : handover(bevo)
-
-i want you to grasp plush toy
-M : grasp(bevo)
-
-i want you to grab plush toy
-M : grasp(bevo)
-
-i want you to hold plush toy
-M : grasp(bevo)
-
-i want you to lift plush toy
-M : lift(bevo)
-
-i want you to raise plush toy
-M : lift(bevo)
-
-i want you to elevate plush toy
-M : lift(bevo)
-
-i want you to pick up plush toy
-M : pickup(bevo)
-
-i want you to place plush toy
-M : place(bevo)
-
-i want you to put down plush toy
-M : place(bevo)
-
-i want you to drop plush toy
-M : place(bevo)
-
-i want you to hand over plush toy
-M : handover(bevo)
-
-i want you to hand me plush toy
-M : handover(bevo)
-
-i want you to give me plush toy
-M : handover(bevo)
-
-i want you to hand them plush toy
-M : handover(bevo)
-
-i want you to give them plush toy
-M : handover(bevo)
-
-i want you to grasp stuffed animal
-M : grasp(bevo)
-
-i want you to grab stuffed animal
-M : grasp(bevo)
-
-i want you to hold stuffed animal
-M : grasp(bevo)
-
-i want you to lift stuffed animal
-M : lift(bevo)
-
-i want you to raise stuffed animal
-M : lift(bevo)
-
-i want you to elevate stuffed animal
-M : lift(bevo)
-
-i want you to pick up stuffed animal
-M : pickup(bevo)
-
-i want you to place stuffed animal
-M : place(bevo)
-
-i want you to put down stuffed animal
-M : place(bevo)
-
-i want you to drop stuffed animal
-M : place(bevo)
-
-i want you to hand over stuffed animal
-M : handover(bevo)
-
-i want you to hand me stuffed animal
-M : handover(bevo)
-
-i want you to give me stuffed animal
-M : handover(bevo)
-
-i want you to hand them stuffed animal
-M : handover(bevo)
-
-i want you to give them stuffed animal
-M : handover(bevo)
 
 i want you to grasp longhorn
 M : grasp(bevo)
@@ -3931,32 +3175,11 @@ M : lift(bevo)
 i want you to elevate longhorn
 M : lift(bevo)
 
-i want you to pick up longhorn
-M : pickup(bevo)
-
 i want you to place longhorn
-M : place(bevo)
-
-i want you to put down longhorn
 M : place(bevo)
 
 i want you to drop longhorn
 M : place(bevo)
-
-i want you to hand over longhorn
-M : handover(bevo)
-
-i want you to hand me longhorn
-M : handover(bevo)
-
-i want you to give me longhorn
-M : handover(bevo)
-
-i want you to hand them longhorn
-M : handover(bevo)
-
-i want you to give them longhorn
-M : handover(bevo)
 
 i want you to grasp cow
 M : grasp(bevo)
@@ -3976,32 +3199,11 @@ M : lift(bevo)
 i want you to elevate cow
 M : lift(bevo)
 
-i want you to pick up cow
-M : pickup(bevo)
-
 i want you to place cow
-M : place(bevo)
-
-i want you to put down cow
 M : place(bevo)
 
 i want you to drop cow
 M : place(bevo)
-
-i want you to hand over cow
-M : handover(bevo)
-
-i want you to hand me cow
-M : handover(bevo)
-
-i want you to give me cow
-M : handover(bevo)
-
-i want you to hand them cow
-M : handover(bevo)
-
-i want you to give them cow
-M : handover(bevo)
 
 i want you to grasp toy
 M : grasp(bevo)
@@ -4021,32 +3223,11 @@ M : lift(bevo)
 i want you to elevate toy
 M : lift(bevo)
 
-i want you to pick up toy
-M : pickup(bevo)
-
 i want you to place toy
-M : place(bevo)
-
-i want you to put down toy
 M : place(bevo)
 
 i want you to drop toy
 M : place(bevo)
-
-i want you to hand over toy
-M : handover(bevo)
-
-i want you to hand me toy
-M : handover(bevo)
-
-i want you to give me toy
-M : handover(bevo)
-
-i want you to hand them toy
-M : handover(bevo)
-
-i want you to give them toy
-M : handover(bevo)
 
 i want you to grasp crayon
 M : grasp(crayon)
@@ -4066,77 +3247,11 @@ M : lift(crayon)
 i want you to elevate crayon
 M : lift(crayon)
 
-i want you to pick up crayon
-M : pickup(crayon)
-
 i want you to place crayon
-M : place(crayon)
-
-i want you to put down crayon
 M : place(crayon)
 
 i want you to drop crayon
 M : place(crayon)
-
-i want you to hand over crayon
-M : handover(crayon)
-
-i want you to hand me crayon
-M : handover(crayon)
-
-i want you to give me crayon
-M : handover(crayon)
-
-i want you to hand them crayon
-M : handover(crayon)
-
-i want you to give them crayon
-M : handover(crayon)
-
-i want you to grasp pink crayon
-M : grasp(crayon)
-
-i want you to grab pink crayon
-M : grasp(crayon)
-
-i want you to hold pink crayon
-M : grasp(crayon)
-
-i want you to lift pink crayon
-M : lift(crayon)
-
-i want you to raise pink crayon
-M : lift(crayon)
-
-i want you to elevate pink crayon
-M : lift(crayon)
-
-i want you to pick up pink crayon
-M : pickup(crayon)
-
-i want you to place pink crayon
-M : place(crayon)
-
-i want you to put down pink crayon
-M : place(crayon)
-
-i want you to drop pink crayon
-M : place(crayon)
-
-i want you to hand over pink crayon
-M : handover(crayon)
-
-i want you to hand me pink crayon
-M : handover(crayon)
-
-i want you to give me pink crayon
-M : handover(crayon)
-
-i want you to hand them pink crayon
-M : handover(crayon)
-
-i want you to give them pink crayon
-M : handover(crayon)
 
 i want you to grasp cylinder
 M : grasp(crayon)
@@ -4156,77 +3271,11 @@ M : lift(crayon)
 i want you to elevate cylinder
 M : lift(crayon)
 
-i want you to pick up cylinder
-M : pickup(crayon)
-
 i want you to place cylinder
-M : place(crayon)
-
-i want you to put down cylinder
 M : place(crayon)
 
 i want you to drop cylinder
 M : place(crayon)
-
-i want you to hand over cylinder
-M : handover(crayon)
-
-i want you to hand me cylinder
-M : handover(crayon)
-
-i want you to give me cylinder
-M : handover(crayon)
-
-i want you to hand them cylinder
-M : handover(crayon)
-
-i want you to give them cylinder
-M : handover(crayon)
-
-i want you to grasp pink cylinder
-M : grasp(crayon)
-
-i want you to grab pink cylinder
-M : grasp(crayon)
-
-i want you to hold pink cylinder
-M : grasp(crayon)
-
-i want you to lift pink cylinder
-M : lift(crayon)
-
-i want you to raise pink cylinder
-M : lift(crayon)
-
-i want you to elevate pink cylinder
-M : lift(crayon)
-
-i want you to pick up pink cylinder
-M : pickup(crayon)
-
-i want you to place pink cylinder
-M : place(crayon)
-
-i want you to put down pink cylinder
-M : place(crayon)
-
-i want you to drop pink cylinder
-M : place(crayon)
-
-i want you to hand over pink cylinder
-M : handover(crayon)
-
-i want you to hand me pink cylinder
-M : handover(crayon)
-
-i want you to give me pink cylinder
-M : handover(crayon)
-
-i want you to hand them pink cylinder
-M : handover(crayon)
-
-i want you to give them pink cylinder
-M : handover(crayon)
 
 i want you to grasp crayola
 M : grasp(crayon)
@@ -4246,77 +3295,11 @@ M : lift(crayon)
 i want you to elevate crayola
 M : lift(crayon)
 
-i want you to pick up crayola
-M : pickup(crayon)
-
 i want you to place crayola
-M : place(crayon)
-
-i want you to put down crayola
 M : place(crayon)
 
 i want you to drop crayola
 M : place(crayon)
-
-i want you to hand over crayola
-M : handover(crayon)
-
-i want you to hand me crayola
-M : handover(crayon)
-
-i want you to give me crayola
-M : handover(crayon)
-
-i want you to hand them crayola
-M : handover(crayon)
-
-i want you to give them crayola
-M : handover(crayon)
-
-i want you to grasp pink crayola
-M : grasp(crayon)
-
-i want you to grab pink crayola
-M : grasp(crayon)
-
-i want you to hold pink crayola
-M : grasp(crayon)
-
-i want you to lift pink crayola
-M : lift(crayon)
-
-i want you to raise pink crayola
-M : lift(crayon)
-
-i want you to elevate pink crayola
-M : lift(crayon)
-
-i want you to pick up pink crayola
-M : pickup(crayon)
-
-i want you to place pink crayola
-M : place(crayon)
-
-i want you to put down pink crayola
-M : place(crayon)
-
-i want you to drop pink crayola
-M : place(crayon)
-
-i want you to hand over pink crayola
-M : handover(crayon)
-
-i want you to hand me pink crayola
-M : handover(crayon)
-
-i want you to give me pink crayola
-M : handover(crayon)
-
-i want you to hand them pink crayola
-M : handover(crayon)
-
-i want you to give them pink crayola
-M : handover(crayon)
 
 would you grasp bevo
 M : grasp(bevo)
@@ -4921,32 +3904,11 @@ M : lift(bevo)
 would you elevate the plush toy
 M : lift(bevo)
 
-would you pick up the plush toy
-M : pickup(bevo)
-
 would you place the plush toy
-M : place(bevo)
-
-would you put down the plush toy
 M : place(bevo)
 
 would you drop the plush toy
 M : place(bevo)
-
-would you hand over the plush toy
-M : handover(bevo)
-
-would you hand me the plush toy
-M : handover(bevo)
-
-would you give me the plush toy
-M : handover(bevo)
-
-would you hand them the plush toy
-M : handover(bevo)
-
-would you give them the plush toy
-M : handover(bevo)
 
 would you grasp the stuffed animal
 M : grasp(bevo)
@@ -4966,32 +3928,11 @@ M : lift(bevo)
 would you elevate the stuffed animal
 M : lift(bevo)
 
-would you pick up the stuffed animal
-M : pickup(bevo)
-
 would you place the stuffed animal
-M : place(bevo)
-
-would you put down the stuffed animal
 M : place(bevo)
 
 would you drop the stuffed animal
 M : place(bevo)
-
-would you hand over the stuffed animal
-M : handover(bevo)
-
-would you hand me the stuffed animal
-M : handover(bevo)
-
-would you give me the stuffed animal
-M : handover(bevo)
-
-would you hand them the stuffed animal
-M : handover(bevo)
-
-would you give them the stuffed animal
-M : handover(bevo)
 
 would you grasp the longhorn
 M : grasp(bevo)
@@ -5191,32 +4132,11 @@ M : lift(crayon)
 would you elevate the pink crayon
 M : lift(crayon)
 
-would you pick up the pink crayon
-M : pickup(crayon)
-
 would you place the pink crayon
-M : place(crayon)
-
-would you put down the pink crayon
 M : place(crayon)
 
 would you drop the pink crayon
 M : place(crayon)
-
-would you hand over the pink crayon
-M : handover(crayon)
-
-would you hand me the pink crayon
-M : handover(crayon)
-
-would you give me the pink crayon
-M : handover(crayon)
-
-would you hand them the pink crayon
-M : handover(crayon)
-
-would you give them the pink crayon
-M : handover(crayon)
 
 would you grasp the cylinder
 M : grasp(crayon)
@@ -5281,32 +4201,11 @@ M : lift(crayon)
 would you elevate the pink cylinder
 M : lift(crayon)
 
-would you pick up the pink cylinder
-M : pickup(crayon)
-
 would you place the pink cylinder
-M : place(crayon)
-
-would you put down the pink cylinder
 M : place(crayon)
 
 would you drop the pink cylinder
 M : place(crayon)
-
-would you hand over the pink cylinder
-M : handover(crayon)
-
-would you hand me the pink cylinder
-M : handover(crayon)
-
-would you give me the pink cylinder
-M : handover(crayon)
-
-would you hand them the pink cylinder
-M : handover(crayon)
-
-would you give them the pink cylinder
-M : handover(crayon)
 
 would you grasp the crayola
 M : grasp(crayon)
@@ -5371,32 +4270,11 @@ M : lift(crayon)
 would you elevate the pink crayola
 M : lift(crayon)
 
-would you pick up the pink crayola
-M : pickup(crayon)
-
 would you place the pink crayola
-M : place(crayon)
-
-would you put down the pink crayola
 M : place(crayon)
 
 would you drop the pink crayola
 M : place(crayon)
-
-would you hand over the pink crayola
-M : handover(crayon)
-
-would you hand me the pink crayola
-M : handover(crayon)
-
-would you give me the pink crayola
-M : handover(crayon)
-
-would you hand them the pink crayola
-M : handover(crayon)
-
-would you give them the pink crayola
-M : handover(crayon)
 
 could you grasp the bevo
 M : grasp(bevo)
@@ -5461,32 +4339,11 @@ M : lift(bevo)
 could you elevate the plush toy
 M : lift(bevo)
 
-could you pick up the plush toy
-M : pickup(bevo)
-
 could you place the plush toy
-M : place(bevo)
-
-could you put down the plush toy
 M : place(bevo)
 
 could you drop the plush toy
 M : place(bevo)
-
-could you hand over the plush toy
-M : handover(bevo)
-
-could you hand me the plush toy
-M : handover(bevo)
-
-could you give me the plush toy
-M : handover(bevo)
-
-could you hand them the plush toy
-M : handover(bevo)
-
-could you give them the plush toy
-M : handover(bevo)
 
 could you grasp the stuffed animal
 M : grasp(bevo)
@@ -5506,32 +4363,11 @@ M : lift(bevo)
 could you elevate the stuffed animal
 M : lift(bevo)
 
-could you pick up the stuffed animal
-M : pickup(bevo)
-
 could you place the stuffed animal
-M : place(bevo)
-
-could you put down the stuffed animal
 M : place(bevo)
 
 could you drop the stuffed animal
 M : place(bevo)
-
-could you hand over the stuffed animal
-M : handover(bevo)
-
-could you hand me the stuffed animal
-M : handover(bevo)
-
-could you give me the stuffed animal
-M : handover(bevo)
-
-could you hand them the stuffed animal
-M : handover(bevo)
-
-could you give them the stuffed animal
-M : handover(bevo)
 
 could you grasp the longhorn
 M : grasp(bevo)
@@ -5731,32 +4567,11 @@ M : lift(crayon)
 could you elevate the pink crayon
 M : lift(crayon)
 
-could you pick up the pink crayon
-M : pickup(crayon)
-
 could you place the pink crayon
-M : place(crayon)
-
-could you put down the pink crayon
 M : place(crayon)
 
 could you drop the pink crayon
 M : place(crayon)
-
-could you hand over the pink crayon
-M : handover(crayon)
-
-could you hand me the pink crayon
-M : handover(crayon)
-
-could you give me the pink crayon
-M : handover(crayon)
-
-could you hand them the pink crayon
-M : handover(crayon)
-
-could you give them the pink crayon
-M : handover(crayon)
 
 could you grasp the cylinder
 M : grasp(crayon)
@@ -5821,32 +4636,11 @@ M : lift(crayon)
 could you elevate the pink cylinder
 M : lift(crayon)
 
-could you pick up the pink cylinder
-M : pickup(crayon)
-
 could you place the pink cylinder
-M : place(crayon)
-
-could you put down the pink cylinder
 M : place(crayon)
 
 could you drop the pink cylinder
 M : place(crayon)
-
-could you hand over the pink cylinder
-M : handover(crayon)
-
-could you hand me the pink cylinder
-M : handover(crayon)
-
-could you give me the pink cylinder
-M : handover(crayon)
-
-could you hand them the pink cylinder
-M : handover(crayon)
-
-could you give them the pink cylinder
-M : handover(crayon)
 
 could you grasp the crayola
 M : grasp(crayon)
@@ -5911,32 +4705,11 @@ M : lift(crayon)
 could you elevate the pink crayola
 M : lift(crayon)
 
-could you pick up the pink crayola
-M : pickup(crayon)
-
 could you place the pink crayola
-M : place(crayon)
-
-could you put down the pink crayola
 M : place(crayon)
 
 could you drop the pink crayola
 M : place(crayon)
-
-could you hand over the pink crayola
-M : handover(crayon)
-
-could you hand me the pink crayola
-M : handover(crayon)
-
-could you give me the pink crayola
-M : handover(crayon)
-
-could you hand them the pink crayola
-M : handover(crayon)
-
-could you give them the pink crayola
-M : handover(crayon)
 
 could you grasp bevo
 M : grasp(bevo)
