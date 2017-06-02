@@ -1,0 +1,19 @@
+#For arm demo. 
+grasp:<i,a>
+lift:<i,a>
+place:<i,a>
+open:<i,a>
+pickup:<i,a>
+handover:<i,a>
+
+the:<<i,t>,i>
+
+#Items. 
+bevo:i
+crayon:i
+gripper:i
+
+#logical
+and:<t,<t,t>>
+or:<t,<t,t>>
+not:<t,t>

@@ -1,0 +1,52 @@
+#Imperatives for arm.
+grasp :- M/NP : lambda x:i.(grasp(x))
+grab :- M/NP : lambda x:i.(grasp(x))
+hold :- M/NP : lambda x:i.(grasp(x))
+
+lift :- M/NP : lambda x:i.(lift(x))
+raise :- M/NP : lambda x:i.(lift(x))
+elevate :- M/NP : lambda x:i.(lift(x))
+
+place :- M/NP : lambda x:i.(place(x))
+put down :- M/NP : lambda x:i.(place(x))
+drop :- M/NP : lambda x:i.(place(x))
+
+pick up :- M/NP : lambda x:i.(pickup(x))
+
+hand over :- M/NP : lambda x:i.(handover(x))
+hand me :- M/NP : lambda x:i.(handover(x))
+give me :- M/NP : lambda x:i.(handover(x))
+hand them :- M/NP : lambda x:i.(handover(x))
+give them :- M/NP : lambda x:i.(handover(x))
+
+open :- M/NP : lambda x:i.(open(x)) 
+
+could you :- M/M : lambda x:a.(x)
+can you :- M/M : lambda x:a.(x)
+please :- M/M : lambda x:a.(x)
+would you :- M/M : lambda x:a.(x)
+i want you to :- M/M : lambda x:a.(x)
+
+#Item surface forms. 
+bevo :- NP : bevo
+plush toy :- NP : bevo
+stuffed animal :- NP : bevo
+longhorn :- NP : bevo
+cow :- NP : bevo
+toy :- NP : bevo
+
+crayon :- NP : crayon
+pink crayon :- NP : crayon
+cylinder :- NP : crayon
+pink cylinder :- NP : crayon
+crayola :- NP : crayon
+pink crayola :- NP : crayon
+
+hand :- NP : gripper
+gripper :- NP : gripper
+fingers :- NP : gripper
+claws :- NP : gripper
+claw  :- NP : gripper
+
+the :- NP/NP : lambda x:i.(x)
+your :- NP/NP : lambda x:i.(x)

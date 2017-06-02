@@ -1,0 +1,62 @@
+nohup: ignoring input
+reading in Ontology
+predicates: ['grasp', 'lift', 'place', 'open', 'pickup', 'handover', 'the', 'bevo', 'crayon', 'gripper', 'and', 'or', 'not']
+types: ['t', 'd', 'a', 'c', 'l', 'i', 'p', [5, 2], [5, 0], [8, 5], [0, 0], [0, 10]]
+entries: [7, 7, 7, 7, 7, 7, 9, 5, 5, 5, 11, 11, 10]
+reading in Lexicon
+surface forms: ['grasp', 'grab', 'hold', 'lift', 'raise', 'elevate', 'place', 'put down', 'drop', 'pick up', 'hand over', 'hand me', 'give me', 'hand them', 'give them', 'bevo', 'plush toy', 'stuffed animal', 'longhorn', 'cow', 'toy', 'crayon', 'pink crayon', 'cylinder', 'pink cylinder', 'crayola', 'pink crayola', 'the']
+categories: ['M', 'PP', [0, 1, 1], 'NP', 'N', [4, 1, 4], [3, 1, 5]]
+semantic forms: [<SemanticNode.SemanticNode instance at 0x7fcc76bc77e8>, <SemanticNode.SemanticNode instance at 0x7fcc75c8f128>, <SemanticNode.SemanticNode instance at 0x7fcc75cacea8>, <SemanticNode.SemanticNode instance at 0x7fcc75c43050>, <SemanticNode.SemanticNode instance at 0x7fcc75c43248>, <SemanticNode.SemanticNode instance at 0x7fcc75c43320>, <SemanticNode.SemanticNode instance at 0x7fcc75c465a8>, <SemanticNode.SemanticNode instance at 0x7fcc75c468c0>]
+entries: [[0], [0], [0], [1], [1], [1], [2], [2], [2], [3], [4], [4], [4], [4], [4], [5], [5], [5], [5], [5], [5], [6], [6], [6], [6], [6], [6], [7]]
+epoch 0
+	matched 212/1776
+	trained 0/1776
+	genlex only 212/1776
+	failed 1564/1776
+epoch 1
+	matched 235/1776
+	trained 25/1776
+	genlex only 40/1776
+	failed 1516/1776
+epoch 2
+	matched 206/1776
+	trained 54/1776
+	genlex only 0/1776
+	failed 1516/1776
+epoch 3
+	matched 210/1776
+	trained 50/1776
+	genlex only 0/1776
+	failed 1516/1776
+epoch 4
+	matched 210/1776
+	trained 50/1776
+	genlex only 0/1776
+	failed 1516/1776
+epoch 5
+	matched 210/1776
+	trained 50/1776
+	genlex only 0/1776
+	failed 1516/1776
+epoch 6
+	matched 206/1776
+	trained 54/1776
+	genlex only 0/1776
+	failed 1516/1776
+epoch 7
+	matched 204/1776
+	trained 56/1776
+	genlex only 0/1776
+	failed 1516/1776
+epoch 8
+	matched 210/1776
+	trained 50/1776
+	genlex only 0/1776
+	failed 1516/1776
+epoch 9
+	matched 210/1776
+	trained 50/1776
+	genlex only 0/1776
+	failed 1516/1776
+Parser not converged!
+Saving log
