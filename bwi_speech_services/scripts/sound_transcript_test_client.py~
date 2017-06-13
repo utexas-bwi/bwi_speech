@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from bwi_speech_services.srv import *
+from std_msgs.msg import String
 import rospy
 
 def sound_transcript_test_client():
@@ -13,4 +14,5 @@ def sound_transcript_test_client():
         print "No good. Boom."
 
 if __name__ == "__main__":
-    sound_transcript_test_client()
+    while(True):
+        sound_transcript_test_client()

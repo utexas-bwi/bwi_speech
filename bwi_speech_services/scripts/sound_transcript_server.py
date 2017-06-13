@@ -29,6 +29,10 @@ from bwi_speech_services.srv import *
 from std_msgs.msg import String
 import rospy
 
+class SpeechTranscript:
+    isGood = True
+    responses = []
+
 def request_stream(data_stream, rate, interim_results=True):
     """Yields `StreamingRecognizeRequest`s constructed from a recording audio
     stream.
@@ -50,12 +54,8 @@ def request_stream(data_stream, rate, interim_results=True):
         # for a list of supported languages.
         language_code='en-US',  # a BCP-47 language tag
 
-        speech_context=SpeechContext(phrases=['bevo', 'longhorn', 'cow', 'plush toy', 'toy', 
-                                              'crayon', 'crayola', 'pink crayon', 'pink crayola', 'cylinder', 'pink cylinder',
-                                              'grasp', 'grab', 'hold', 'lift', 'raise', 'elevate', 'pick up', 'place', 
-                                              'put down', 'drop', 'hand', 'over' 'me' 'them',
-                                              'could', 'you', 'open', 'hand', 'claws', 'fingers', 'gripper', 'will', 'can', 'please'
-                                              ]),
+        #You can limit the lexicon here.
+        #speech_context=SpeechContext(phrases=['bevo', 'longhorn', ..]),
     )
     streaming_config = cloud_speech_pb2.StreamingRecognitionConfig(
         interim_results=interim_results,
@@ -144,13 +144,17 @@ def listen_print_loop(recognize_stream):
     final one, print a newline to preserve the finalized transcription.
     """
 
-    #TODO will hold alternative transcripts (i.e. n-best list). 
-    responses = []
+    #TODO will hold alternative transcripts (i.e. n-best list).
+    returnVal = SpeechTranscript()
+    returnVal.responses = []
+    returnVal.isGood = True
 
     num_chars_printed = 0
     for resp in recognize_stream:
         if resp.error.code != code_pb2.OK:
-            raise RuntimeError('Server error: ' + resp.error.message)
+            returnVal.isGood = False
+            return returnVal
+            #raise RuntimeError('Server error: ' + resp.error.message)
 
         if not resp.results:
             continue
@@ -177,10 +181,10 @@ def listen_print_loop(recognize_stream):
         else:
             #Get final transcript for this utterance and store it. 
             response = transcript + overwrite_chars
-            responses.append(response)
+            returnVal.responses.append(response)
+            return returnVal
 
             #Return response instead of looping so we may feed it to parser. 
-            return response
 
             #Moved this functionality to the main loop, delete if wanted. 
             """
@@ -192,6 +196,7 @@ def listen_print_loop(recognize_stream):
 
             num_chars_printed = 0
             """
+    return returnVal
 
 def getAudioText():
     # For streaming audio from the microphone, there are three threads.
@@ -219,20 +224,25 @@ def make_channel(host, port):
 
 def handle_request_sound_transcript(req):
     requestSoundTranscriptResponse = RequestSoundTranscriptResponse()
-    #requestSoundTranscriptResponse.utterance = 'OK! THIS SHIT WORKS'
-    requestSoundTranscriptResponse.utterance = getAudioText()
-    print "OMG!"
+    resp = getAudioText()
+    requestSoundTranscriptResponse.utterance = resp.responses[0]
+    requestSoundTranscriptResponse.isGood = resp.isGood
     return requestSoundTranscriptResponse
 
 def sound_transcript_server():
     rospy.init_node(NAME)
-    global googleSpeech
-    googleSpeech = cloud_speech_pb2.SpeechStub(
-        make_channel('speech.googleapis.com', 443))
-    serv = rospy.Service('sound_transcript_server', RequestSoundTranscript,
-        handle_request_sound_transcript)
+    while(True):
+        try:
+            global googleSpeech
+            googleSpeech = cloud_speech_pb2.SpeechStub(
+                make_channel('speech.googleapis.com', 443))
+            serv = rospy.Service('sound_transcript_server', RequestSoundTranscript,
+                handle_request_sound_transcript)
 
-    rospy.spin()
+            rospy.spin()
+            break
+        except RuntimeError:
+            pass
 
 if __name__ == "__main__":
     sound_transcript_server()
