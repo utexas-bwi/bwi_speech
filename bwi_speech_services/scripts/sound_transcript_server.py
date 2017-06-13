@@ -224,9 +224,14 @@ def make_channel(host, port):
 
 def handle_request_sound_transcript(req):
     requestSoundTranscriptResponse = RequestSoundTranscriptResponse()
-    resp = getAudioText()
-    requestSoundTranscriptResponse.utterance = resp.responses[0]
-    requestSoundTranscriptResponse.isGood = resp.isGood
+    try:
+        resp = getAudioText()
+        requestSoundTranscriptResponse.utterance = resp.responses[0]
+        requestSoundTranscriptResponse.isGood = resp.isGood
+    except RuntimeError:
+        googleSpeech = cloud_speech_pb2.SpeechStub(
+            make_channel('speech.googleapis.com', 443))
+    
     return requestSoundTranscriptResponse
 
 def sound_transcript_server():

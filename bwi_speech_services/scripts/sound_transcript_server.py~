@@ -151,9 +151,7 @@ def listen_print_loop(recognize_stream):
 
     num_chars_printed = 0
     for resp in recognize_stream:
-        print "EH"
         if resp.error.code != code_pb2.OK:
-            print "Shit"
             returnVal.isGood = False
             return returnVal
             #raise RuntimeError('Server error: ' + resp.error.message)
@@ -226,9 +224,14 @@ def make_channel(host, port):
 
 def handle_request_sound_transcript(req):
     requestSoundTranscriptResponse = RequestSoundTranscriptResponse()
-    resp = getAudioText()
-    requestSoundTranscriptResponse.utterance = resp.responses[0]
-    requestSoundTranscriptResponse.isGood = resp.isGood
+    try:
+        resp = getAudioText()
+        requestSoundTranscriptResponse.utterance = resp.responses[0]
+        requestSoundTranscriptResponse.isGood = resp.isGood
+    except RuntimeError:
+            googleSpeech = cloud_speech_pb2.SpeechStub(
+                make_channel('speech.googleapis.com', 443))
+    
     return requestSoundTranscriptResponse
 
 def sound_transcript_server():
