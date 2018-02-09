@@ -229,8 +229,11 @@ def handle_request_sound_transcript(req):
         requestSoundTranscriptResponse.utterance = resp.responses[0]
         requestSoundTranscriptResponse.isGood = resp.isGood
     except RuntimeError:
+        global googleSpeech
         googleSpeech = cloud_speech_pb2.SpeechStub(
             make_channel('speech.googleapis.com', 443))
+        requestSoundTranscriptResponse.isGood = False
+
     
     return requestSoundTranscriptResponse
 
