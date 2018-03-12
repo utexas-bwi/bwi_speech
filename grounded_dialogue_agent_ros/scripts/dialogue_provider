@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+import sys
+import os
+# Place TSP, grounded_dialog_agent in the parent directory of the package. This'll add them to the path so the imports below work
+sys.path.append(os.path.abspath('../../'))
+
+import rospy
+import actionlib
+import grounded_dialogue_agent_ros.msg
+
+
+class DialogueActionServer:
+    # create messages that are used to publish feedback/result
+    _feedback = grounded_dialogue_agent_ros.msg.ConductDialogueFeedback()
+    _result = grounded_dialogue_agent_ros.msg.ConductDialogueResult()
+
+    def __init__(self, name, agent):
+        self.agent = agent
+        self._action_name = name
+        self._as = actionlib.SimpleActionServer(self._action_name, grounded_dialogue_agent_ros.msg.ConductDialogueAction,
+                                                execute_cb=self.execute_cb, auto_start=False)
+        self._as.start()
+
+    def execute_cb(self, goal):
+        # TODO: Use the agent to conduct the dialogue
+        #agent.do
+
+        # TODO: If things fail, set the goal as aborted and return
+        # if agent.failed:
+        #    self._as.set_aborted(self._result)
+        #    return
+
+        # TODO: If things succeed, populate these fields on the result
+        # The type of command here doesn't matter but the other strings do
+        # Locations should be rooms or tables noted in the BWI knowledgebase.
+        # Object ID should just be the index of the object (left to right) on the table at the object location
+        self._result.command_type = "deliver"
+        self._result.object_location = "l3.500"
+        self._result.destination_location = "l3.512"
+        self._result.object_id = "0"
+        rospy.loginfo('%s: Succeeded' % self._action_name)
+        self._as.set_succeeded(self._result)
+
+
+if __name__ == '__main__':
+    rospy.init_node('dialogue_manager')
+    print "main: loading grounder from file..."
+
+    # TODO: Load and configure an agent
+    agent = None
+    """
+    rosrun perception_classifiers $PC_PATH/src/phm/grounded_dialog_agent/main.py  --parser_fn ~/robot_parsing_resources/parser.pickle --word_embeddings_fn ~/robot_parsing_resources/GoogleNews-vectors-negative300.bin --kb_static_facts_fn $PC_PATH/src/phm/grounded_dialog_agent/ispy_setting/static_facts.txt --kb_perception_source_dir $PC_PATH/src/phm/grounded_dialog_agent/mturk_experiment/fold2/perception_source/ --kb_perception_feature_dir $PC_PATH/src/phm/grounded_dialog_agent/ispy_setting/perception_resources/features/ --image_path $PC_PATH/src/phm/grounded_dialog_agent/www/images/objects/ --active_test_set 5,14,4,27 --active_train_set 0,30,1,31 --max_syn_qs 2 --max_opp_qs 5
+    
+    kb_static_facts_fn = FLAGS_kb_static_facts_fn
+    kb_perception_source_dir = FLAGS_kb_perception_source_dir
+    kb_perception_feature_dir = FLAGS_kb_perception_feature_dir
+    active_test_set = [int(oidx) for oidx in FLAGS_active_test_set.split(',')]
+    """
+    # TODO: Pass the agent into the server
+    server = DialogueActionServer(rospy.get_name(), agent)
+
+
+rospy.spin()
