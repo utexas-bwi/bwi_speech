@@ -43,8 +43,7 @@ class DialogueActionServer:
 
 
 if __name__ == '__main__':
-    rospy.init_node('dialogue_manager')
-    print "main: loading grounder from file..."
+    rospy.init_node('conduct_dialogue')
 
     # TODO: Load and configure an agent
     agent = None
